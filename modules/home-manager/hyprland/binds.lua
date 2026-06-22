@@ -2,12 +2,13 @@ local terminal = "kitty"
 local browser = "google-chrome"
 local file_manager = "dolphin"
 local launcher = "rofi -show drun"
+local workspaces_per_monitor = hypr_user_config.workspaces_per_monitor
+local workspace_count = workspaces_per_monitor * #hypr_user_config.workspace_monitors
 
 function workspace_on_current_monitor(i)
-    local first = math.floor((hl.get_active_workspace().id - 1) / 10) * 10
+    local first = math.floor((hl.get_active_workspace().id - 1) / workspaces_per_monitor) * workspaces_per_monitor
     local next = first + i
-    local new = math.min(20, math.max(1, next))
-    hl.notification.create({ text = "first " .. first .. " next " .. next .. " new " .. new, duration = 5000, timeout = 1000 })
+    local new = math.min(workspace_count, math.max(1, next))
     return tostring(new)
 end
 
@@ -61,7 +62,7 @@ for _, binding in ipairs(directions) do
     )
 end
 
-for workspace = 1, 10 do
+for workspace = 1, math.min(workspaces_per_monitor, 10) do
     local key = workspace % 10
 
     hl.bind(

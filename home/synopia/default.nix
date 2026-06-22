@@ -13,6 +13,7 @@
 
   dev.quickshellService.path = "/home/synopia/nixos-config/modules/home-manager/quickshell";
   dev.quickshellService.developmentPath = "/home/synopia/nixos-config/modules/home-manager/quickshell";
+  xdg.configFile."hypr/config/user.lua".source = ./hyprland.lua;
   xdg.configFile."openvpn/bishop.localdomain.ovpn".source = ./openvpn/bishop.localdomain.ovpn;
 
   home.activation.installOpenVpnCredentials = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -68,7 +69,6 @@
     kdePackages.dolphin
     google-chrome
     firefox
-    jetbrains.idea
     networkmanagerapplet
     inputs.codex-cli-nix.packages.${pkgs.system}.default
     fastfetch

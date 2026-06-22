@@ -9,5 +9,6 @@
     ./printing.nix
     ./development.nix
     ./flatpak.nix
+    ./gaming.nix
   ];
 }
