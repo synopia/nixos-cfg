@@ -76,6 +76,8 @@
     obsidian
     magnetic-catppuccin-gtk
     sqlite
+    xxd
+    gzip
   ];
   programs.home-manager.enable = true;
   programs.firefox.enable = true;
