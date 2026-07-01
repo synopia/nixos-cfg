@@ -38,7 +38,7 @@
   services.loa-logs = {
     enable = true;
     version = "1.47.0";
-    daemonHash = "sha256-919e6051e7b7a022de1c3b4acdadb631c8848eebe3123d12ab7a799bc3b17377";
-    appImageHash = "sha256-007fe8d2b4554ae2e0f44c7bc031397fbaf5eea8219dffe53857626c6e186758";
+    # daemonHash = "sha256-919e6051e7b7a022de1c3b4acdadb631c8848eebe3123d12ab7a799bc3b17377";
+    # appImageHash = "sha256-007fe8d2b4554ae2e0f44c7bc031397fbaf5eea8219dffe53857626c6e186758";
   };
 }
