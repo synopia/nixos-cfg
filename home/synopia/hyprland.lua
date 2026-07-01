@@ -10,7 +10,8 @@ hypr_user_config = {
         "vesktop",
         "karere",
         "obsidian",
-        "loa-logs"
+        "loa-logs",
+        "steam -silent"
     },
 }
 
@@ -37,6 +38,9 @@ end)
 hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("firefox"), {
     description = "Open Firefox",
 })
+hl.bind("SUPER + Z", hl.dsp.exec_cmd("zeditor"), {
+    description = "Open Zed",
+})
 
 hl.window_rule({
     match = { class = "vesktop" },
@@ -47,7 +51,7 @@ hl.window_rule({
     workspace = "11",
 })
 hl.window_rule({
-    match = { title = "Meter | LOA Logs" },
+    match = { title = "^Meter \\| LOA Logs$" },
     workspace = "11",
 })
 hl.window_rule({

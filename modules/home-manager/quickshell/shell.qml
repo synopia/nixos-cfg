@@ -2,11 +2,14 @@
 //
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.LocalStorage
 import Quickshell
 import qs.components
 import qs.theme
+import qs.services
 
 Scope {
+
     Overview {}
     NotificationCenter {}
 
@@ -45,6 +48,7 @@ Scope {
 
                 Resources {}
 
+                LostArkState {}
                 Item {
                     Layout.fillWidth: true
                 }

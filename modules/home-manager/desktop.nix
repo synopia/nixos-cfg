@@ -14,6 +14,7 @@
     file-roller # archive
     gnome-system-monitor
     gnome-calculator
+    qpwgraph # PipeWire graph viewer
 
   ];
   # catppuccin = {

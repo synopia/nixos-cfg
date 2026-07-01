@@ -40,10 +40,13 @@ hl.bind("SUPER + V", hl.dsp.window.float({
 }), {
     description = "Toggle floating",
 })
-hl.bind("SUPER + P", hl.dsp.layout("pseudo"), {
-    description = "Toggle pseudotiling",
+hl.bind("SUPER + P", function()
+    hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+    hl.dispatch(hl.dsp.window.pin({ action = "toggle" }))
+end, {
+    description = "Float+Pin",
 })
-hl.bind("SUPER + D", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind("SUPER + D", hl.dsp.exec_cmd(launcher))
 local directions = {
     { key = "Left",  direction = "l" },
     { key = "Right", direction = "r" },
