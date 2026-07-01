@@ -39,6 +39,6 @@
     enable = true;
     version = "1.47.0";
     daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
-    # appImageHash = "sha256-007fe8d2b4554ae2e0f44c7bc031397fbaf5eea8219dffe53857626c6e186758";
+    appImageHash = "sha256-kZ5gUee3oCLeHDtKza22MciEjuvjEj0Sq3p5m8Oxc3c=";
   };
 }
