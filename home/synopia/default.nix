@@ -7,7 +7,6 @@
 
 {
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
     ../../modules/home-manager
   ];
 
@@ -37,11 +36,11 @@
   home.homeDirectory = "/home/synopia";
   home.stateVersion = "26.05";
 
-  catppuccin = {
-    enable = true;
-    autoEnable = true;
-    flavor = "mocha";
-  };
+  # catppuccin = {
+  # enable = true;
+  # autoEnable = true;
+  # flavor = "mocha";
+  # };
 
   programs.git = {
     enable = true;
@@ -75,6 +74,7 @@
     vesktop
     karere
     obsidian
+    magnetic-catppuccin-gtk
   ];
   programs.home-manager.enable = true;
   programs.firefox.enable = true;

@@ -9,14 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    catppuccin-palette = {
-      url = "github:catppuccin/palette";
-      flake = false;
     };
 
     hyprland = {
@@ -25,7 +20,10 @@
     };
 
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
-
+    nixos-manager = {
+      url = "github:icefirex/nixos-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # nix-ld = {
     #   url = "github:Mic92/nix-ld";
     #   inputs.nixpkgs.follows = "nixpkgs";

@@ -16,30 +16,45 @@
     gnome-calculator
 
   ];
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "mauve";
-    gtk = {
-      icon = {
-        enable = true;
-        flavor = config.catppuccin.flavor;
-        accent = config.catppuccin.accent;
-      };
-    };
-    kvantum = {
-      enable = true;
-      apply = true;
-    };
+  # catppuccin = {
+  #   enable = true;
+  #   autoEnable = true;
+  #   flavor = "mocha";
+  #   accent = "mauve";
+  #   gtk = {
+  #     icon = {
+  #       enable = true;
+  #       flavor = config.catppuccin.flavor;
+  #       accent = config.catppuccin.accent;
+  #     };
 
-    qt5ct = {
-      enable = false;
-    };
-  };
+  #   };
+  #   kvantum = {
+  #     enable = true;
+  #     apply = true;
+  #   };
+
+  #   qt5ct = {
+  #     enable = false;
+  #   };
+  # };
 
   gtk = {
     enable = true;
-
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
   };
 
   home.pointerCursor = {
@@ -50,15 +65,7 @@
     x11.enable = true;
   };
 
-  qt = {
-    enable = true;
-    platformTheme.name = "kvantum";
-    style.name = "kvantum";
-
-  };
-
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = lib.mkForce "kde";
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
   };

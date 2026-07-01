@@ -17,8 +17,8 @@ in
     config.hyprland = {
       default = [
         "hyprland"
-        "kde"
         "gtk"
+        "kde"
       ];
       "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
       "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];

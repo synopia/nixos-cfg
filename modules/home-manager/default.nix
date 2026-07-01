@@ -5,9 +5,10 @@
     ./development.nix
     ./desktop.nix
     ./hyprland.nix
+    ./hypridle.nix
     ./apps
     ./services
-    ./theme
+    # ./theme
     ./quickshell
   ];
 }

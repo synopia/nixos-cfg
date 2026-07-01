@@ -128,6 +128,19 @@ Singleton {
             historyOpen = false;
     }
 
+    function invokeDefaultAction(historyId) {
+        const nativeNotification = nativeNotifications[historyId];
+        if (!nativeNotification)
+            return;
+
+        for (const action of nativeNotification.actions ?? []) {
+            if (action.identifier === "default" && typeof action.invoke === "function") {
+                action.invoke();
+                return;
+            }
+        }
+    }
+
     function toggleHistory(screen) {
         if (screen)
             displayScreen = screen;

@@ -9,7 +9,8 @@ hypr_user_config = {
     autostart = {
         "vesktop",
         "karere",
-        "obsidian"
+        "obsidian",
+        "loa-logs"
     },
 }
 

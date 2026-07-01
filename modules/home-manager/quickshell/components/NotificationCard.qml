@@ -7,6 +7,7 @@ Rectangle {
 
     required property var notification
     property bool compact: false
+    signal defaultActionRequested
     signal removeRequested
 
     width: ListView.view?.width ?? 360
@@ -97,9 +98,15 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
         onEntered: root.hovered = true
         onExited: root.hovered = false
-        onClicked: root.removeRequested()
+        onClicked: mouse => {
+            if (mouse.button === Qt.RightButton)
+                root.removeRequested();
+            else if (mouse.button === Qt.LeftButton)
+                root.defaultActionRequested();
+        }
     }
 }

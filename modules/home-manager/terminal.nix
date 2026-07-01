@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -8,11 +7,6 @@
       cursor_shape = "beam";
       cursor_trail = 1;
       shell = "fish";
-    };
-    font = {
-      name = "JetBrains Mono Nerd Font";
-      size = 11;
-      package = pkgs.nerd-fonts.jetbrains-mono;
     };
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";

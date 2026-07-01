@@ -56,6 +56,10 @@ Scope {
                     width: popupColumn.width
                     notification: modelData
                     compact: true
+                    onDefaultActionRequested:
+                        NotificationService.invokeDefaultAction(
+                            modelData.historyId
+                        )
                     onRemoveRequested:
                         NotificationService.removeNotification(
                             modelData.historyId
@@ -158,6 +162,10 @@ Scope {
                         required property var modelData
                         width: historyList.width
                         notification: modelData
+                        onDefaultActionRequested:
+                            NotificationService.invokeDefaultAction(
+                                modelData.historyId
+                            )
                         onRemoveRequested:
                             NotificationService.removeNotification(
                                 modelData.historyId

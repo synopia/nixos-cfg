@@ -9,6 +9,10 @@
       inherit inputs;
     };
 
-    modules = [ ./configuration.nix ];
+    modules = [
+      inputs.stylix.nixosModules.stylix
+
+      ./configuration.nix
+    ];
   };
 }
