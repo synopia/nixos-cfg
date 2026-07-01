@@ -2,6 +2,7 @@ local terminal = "kitty"
 local browser = "google-chrome"
 local file_manager = "dolphin"
 local launcher = "rofi -show drun"
+local screenshot_region = [[sh -c 'state="${XDG_RUNTIME_DIR:-/tmp}/quickshell-screenshot-region"; touch "$state"; trap "rm -f \"$state\"" EXIT; sleep 0.1; geometry="$(slurp)" || exit 1; grim -g "$geometry" - | wl-copy -t image/png']]
 local workspaces_per_monitor = hypr_user_config.workspaces_per_monitor
 local workspace_count = workspaces_per_monitor * #hypr_user_config.workspace_monitors
 
@@ -24,6 +25,9 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd(file_manager), {
 })
 hl.bind("SUPER + Space", hl.dsp.exec_cmd(launcher), {
     description = "Open application launcher",
+})
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(screenshot_region), {
+    description = "Copy region screenshot",
 })
 
 hl.bind("SUPER + Q", hl.dsp.window.close(), {

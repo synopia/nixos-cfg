@@ -8,6 +8,9 @@ import qs.services
 
 BarPill {
     id: root
+
+    property bool screenshotSelecting: false
+
     content: Row {
         property color accent: Theme.mauve
 
@@ -16,7 +19,7 @@ BarPill {
             font.pixelSize: 9
             font.weight: Font.Bold
 
-            text: "LOA"
+            text: `LOA ${LOALogs.weekOffset !== 0 ? LOALogs.weekOffset : ""}`
         }
     }
     MouseArea {
@@ -37,7 +40,7 @@ BarPill {
         id: loaState
 
         property var cols: 8
-        visible: hoverArea.containsMouse
+        visible: hoverArea.containsMouse || root.screenshotSelecting
         color: "transparent"
         grabFocus: false
         implicitWidth: stateFrame.implicitWidth
@@ -60,7 +63,6 @@ BarPill {
             radius: 8
             implicitWidth: tableGrid.implicitWidth + 24
             implicitHeight: tableGrid.implicitHeight + 24
-
             GridLayout {
                 id: tableGrid
                 anchors.centerIn: parent
@@ -94,6 +96,26 @@ BarPill {
                     }
                 }
             }
+        }
+    }
+
+    Process {
+        id: screenshotStateProcess
+        command: ["sh", "-c", "test -e \"${XDG_RUNTIME_DIR:-/tmp}/quickshell-screenshot-region\" && printf 1 || printf 0"]
+
+        stdout: StdioCollector {
+            onStreamFinished: root.screenshotSelecting = text.trim() === "1"
+        }
+    }
+
+    Timer {
+        interval: 100
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            if (!screenshotStateProcess.running)
+                screenshotStateProcess.running = true;
         }
     }
 }
