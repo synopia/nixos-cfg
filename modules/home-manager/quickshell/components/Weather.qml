@@ -35,24 +35,74 @@ BarPill {
         return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
 
-    function ansiColor(code) {
+    function hexByte(value) {
+        const hex = Math.max(0, Math.min(255, value)).toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+    }
+
+    function rgb(red, green, blue) {
+        return `#${root.hexByte(red)}${root.hexByte(green)}${root.hexByte(blue)}`;
+    }
+
+    function xtermColor(index) {
+        const base = ["#000000", "#800000", "#008000", "#808000", "#000080", "#800080", "#008080", "#c0c0c0", "#808080", "#ff0000", "#00ff00", "#ffff00", "#0000ff", "#ff00ff", "#00ffff", "#ffffff",];
+
+        if (index >= 0 && index <= 15)
+            return base[index];
+        if (index >= 16 && index <= 231) {
+            const value = index - 16;
+            const levels = [0, 95, 135, 175, 215, 255];
+            return root.rgb(levels[Math.floor(value / 36)], levels[Math.floor(value / 6) % 6], levels[value % 6]);
+        }
+        if (index >= 232 && index <= 255) {
+            const level = 8 + (index - 232) * 10;
+            return root.rgb(level, level, level);
+        }
+
+        return null;
+    }
+
+    function ansiForeground(code) {
         const colors = {
-            30: Theme.overlay1,
-            31: Theme.red,
-            32: Theme.green,
-            33: Theme.yellow,
-            34: Theme.blue,
-            35: Theme.mauve,
-            36: Theme.sky,
+            30: "#666666",
+            31: "#ff7070",
+            32: "#b0f986",
+            33: "#c6c502",
+            34: "#8db7e0",
+            35: "#f271fb",
+            36: "#6bf7ff",
             37: Theme.text,
-            90: Theme.overlay2,
-            91: Theme.red,
-            92: Theme.green,
-            93: Theme.yellow,
-            94: Theme.blue,
-            95: Theme.pink,
-            96: Theme.teal,
+            90: "#838887",
+            91: "#ff3333",
+            92: "#00ff00",
+            93: "#fffc67",
+            94: "#6871ff",
+            95: "#ff76ff",
+            96: "#60fcff",
             97: Theme.text
+        };
+
+        return colors[code] ?? null;
+    }
+
+    function ansiBackground(code) {
+        const colors = {
+            40: "#676767",
+            41: "#ff4343",
+            42: "#99ff5f",
+            43: "#c6c502",
+            44: "#8db7e0",
+            45: "#f271fb",
+            46: "#6bf7ff",
+            47: Theme.text,
+            100: "#838887",
+            101: "#ff3333",
+            102: "#00ff00",
+            103: "#fffc67",
+            104: "#6871ff",
+            105: "#ff76ff",
+            106: "#60fcff",
+            107: Theme.text
         };
 
         return colors[code] ?? null;
@@ -61,14 +111,29 @@ BarPill {
     function ansiToHtml(value) {
         let result = "";
         let lastIndex = 0;
-        let color = Theme.text;
-        let bold = false;
+        let foreground = Theme.text;
+        let background = "";
+        let faint = false;
+        let italic = false;
+        let underline = false;
+        let strike = false;
         let spanOpen = false;
         const ansi = /\x1b\[([0-9;]*)m/g;
 
         function openSpan() {
-            const weight = bold ? "; font-weight: 700" : "";
-            result += `<span style="color: ${color}${weight}">`;
+            let style = `color: ${faint ? "#838887" : foreground}`;
+            if (background)
+                style += `; background-color: ${background}`;
+            if (italic)
+                style += "; font-style: italic";
+            if (underline && strike)
+                style += "; text-decoration: underline line-through";
+            else if (underline)
+                style += "; text-decoration: underline";
+            else if (strike)
+                style += "; text-decoration: line-through";
+
+            result += `<span style="${style}">`;
             spanOpen = true;
         }
 
@@ -79,6 +144,15 @@ BarPill {
             }
         }
 
+        function reset() {
+            foreground = Theme.text;
+            background = "";
+            faint = false;
+            italic = false;
+            underline = false;
+            strike = false;
+        }
+
         openSpan();
 
         for (let match = ansi.exec(value); match; match = ansi.exec(value)) {
@@ -86,20 +160,60 @@ BarPill {
             closeSpan();
 
             const codes = match[1] === "" ? [0] : match[1].split(";").map(Number);
-            for (const code of codes) {
-                const nextColor = root.ansiColor(code);
+            for (let index = 0; index < codes.length; index++) {
+                const code = codes[index];
+                const nextForeground = root.ansiForeground(code);
+                const nextBackground = root.ansiBackground(code);
 
                 if (code === 0) {
-                    color = Theme.text;
-                    bold = false;
+                    reset();
                 } else if (code === 1) {
-                    bold = true;
+                    faint = false;
+                } else if (code === 2) {
+                    faint = true;
+                } else if (code === 3) {
+                    italic = true;
+                } else if (code === 4) {
+                    underline = true;
+                } else if (code === 9) {
+                    strike = true;
                 } else if (code === 22) {
-                    bold = false;
+                    faint = false;
+                } else if (code === 23) {
+                    italic = false;
+                } else if (code === 24) {
+                    underline = false;
+                } else if (code === 29) {
+                    strike = false;
                 } else if (code === 39) {
-                    color = Theme.text;
-                } else if (nextColor) {
-                    color = nextColor;
+                    foreground = Theme.text;
+                } else if (code === 49) {
+                    background = "";
+                } else if (nextForeground) {
+                    foreground = nextForeground;
+                    faint = false;
+                } else if (nextBackground) {
+                    background = nextBackground;
+                } else if ((code === 38 || code === 48) && codes[index + 1] === 5) {
+                    const color = root.xtermColor(codes[index + 2]);
+                    if (color) {
+                        if (code === 38) {
+                            foreground = color;
+                            faint = false;
+                        } else {
+                            background = color;
+                        }
+                    }
+                    index += 2;
+                } else if ((code === 38 || code === 48) && codes[index + 1] === 2) {
+                    const color = root.rgb(codes[index + 2], codes[index + 3], codes[index + 4]);
+                    if (code === 38) {
+                        foreground = color;
+                        faint = false;
+                    } else {
+                        background = color;
+                    }
+                    index += 4;
                 }
             }
 

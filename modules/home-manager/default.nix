@@ -8,6 +8,7 @@
     ./hypridle.nix
     ./apps
     ./services
+    ./wireplumber
     # ./theme
     ./quickshell
   ];
