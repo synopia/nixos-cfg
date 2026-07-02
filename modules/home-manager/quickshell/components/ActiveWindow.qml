@@ -12,7 +12,7 @@ BarPill {
     property var clients: []
 
     readonly property HyprlandMonitor monitor: Hyprland.monitorFor(targetScreen)
-    readonly property int workspaceId: monitor?.activeWorkspace?.id ?? 1
+    readonly property int workspaceId: monitor.activeWorkspace?.id ?? 1
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
     readonly property var workspaceWindow: biggestClient(workspaceId)
     readonly property bool activeWindowIsLocal: (monitor?.focused ?? false) && (activeWindow?.activated ?? false)
