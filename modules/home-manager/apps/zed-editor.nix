@@ -41,8 +41,6 @@
               "${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
               "-I"
               "${pkgs.quickshell}/lib/qt-6/qml"
-              "-I"
-              "~/nixos-config/modules/home-manager/quickshell"
               "--no-cmake-calls"
             ];
           };
