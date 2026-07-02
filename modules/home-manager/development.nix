@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
     nodejs_22
@@ -19,13 +19,13 @@
     qt6.qtwayland
     qt6.qt5compat
 
-    qt5.qtbase
-    qt5.qtbase.bin
-    qt5.qtdeclarative
-    qt5.qtdeclarative.bin
-    # qt5.qttools
-    # qt5.qttools.bin
-    qt5.qtwayland
+    (lib.lowPrio qt5.qtbase)
+    (lib.lowPrio qt5.qtbase.bin)
+    (lib.lowPrio qt5.qtdeclarative)
+    (lib.lowPrio qt5.qtdeclarative.bin)
+    (lib.lowPrio qt5.qttools)
+    (lib.lowPrio qt5.qttools.bin)
+    (lib.lowPrio qt5.qtwayland)
 
     jetbrains.idea
   ];
