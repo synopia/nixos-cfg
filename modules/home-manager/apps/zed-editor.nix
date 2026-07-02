@@ -4,8 +4,10 @@
   lib,
   ...
 }:
+let
+  quickshellVfs = "/run/user/1000/quickshell/vfs/b36c8965af8905324066e020211f748b";
+in
 {
-
   programs.zed-editor = {
     enable = true;
     extensions = [
@@ -37,6 +39,10 @@
           binary = {
             path = "${pkgs.kdePackages.qtdeclarative}/bin/qmlls";
             arguments = [
+              "--build-dir"
+              quickshellVfs
+              "-I"
+              quickshellVfs
               "-I"
               "${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
               "-I"
