@@ -23,8 +23,8 @@
     qt5.qtbase.bin
     qt5.qtdeclarative
     qt5.qtdeclarative.bin
-    qt5.qttools
-    qt5.qttools.bin
+    # qt5.qttools
+    # qt5.qttools.bin
     qt5.qtwayland
 
     jetbrains.idea
