@@ -16,6 +16,7 @@
     gnome-calculator
     qpwgraph # PipeWire graph viewer
     dgop
+    rg
   ];
   # catppuccin = {
   #   enable = true;

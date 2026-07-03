@@ -63,11 +63,11 @@ Scope {
 
                 Clock {}
                 Weather {}
-                Volume {}
                 Vpn {}
                 NotificationIcon {
                     notificationScreen: bar.screen
                 }
+                Volume {}
                 Tray {}
             }
         }
