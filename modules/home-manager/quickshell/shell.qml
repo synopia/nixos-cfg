@@ -63,6 +63,7 @@ Scope {
 
                 Clock {}
                 Weather {}
+                Volume {}
                 Vpn {}
                 NotificationIcon {
                     notificationScreen: bar.screen
