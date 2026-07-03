@@ -57,7 +57,7 @@ BarPill {
     PopupWindow {
         id: loaState
 
-        property var cols: 8
+        property var cols: 3 + 2 * 3
         visible: root.popupOpen || root.screenshotSelecting
         color: "transparent"
         grabFocus: false

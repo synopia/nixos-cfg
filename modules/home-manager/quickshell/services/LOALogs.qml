@@ -13,8 +13,6 @@ Singleton {
     readonly property var laStart: new Date("2024-01-03T09:00:00")
     property var data: []
     property var rawData: []
-    property var from: 0
-    property var to: 0
     property var weekOffset: 0
     property string dpsMode: "ndps"
 
@@ -29,28 +27,31 @@ Singleton {
         refresh();
     }
     function refresh() {
-        const week = Math.floor((new Date().getTime() - laStart.getTime()) / 1000 / 60 / 60 / 24 / 7) - weekOffset;
-        fetchAll(week);
-    }
-    function fetchAll(week) {
-        root.from = (week) * 7 * 24 * 60 * 60 * 1000 + laStart.getTime();
-        root.to = (week + 1) * 7 * 24 * 60 * 60 * 1000 + laStart.getTime();
         fetchData.running = true;
     }
     function setDpsMode(mode) {
         if (mode === "dps" || mode === "ndps" || mode === "rdps")
             dpsMode = mode;
     }
+    function customRound(num, decimalPlaces = 1) {
+        const p = Math.pow(10, decimalPlaces);
+        const n = num * p * (1 + Number.EPSILON);
+        return (Math.round(n) / p).toString();
+    }
+
+    function abbreviateNumber(n, round = 2) {
+        if (n >= 1e3 && n < 1e6)
+            return (n / 1e3).toFixed(1) + "k";
+        if (n >= 1e6 && n < 1e9)
+            return +(n / 1e6).toFixed(1) + "m";
+        if (n >= 1e9 && n < 1e12)
+            return +(n / 1e9).toFixed(round) + "b";
+        if (n >= 1e12)
+            return +(n / 1e12).toFixed(round) + "t";
+        else
+            return parseInt(n).toFixed(0);
+    }
     function buildTable(data) {
-        const raidBosses = {
-            'Abyss Lord Kazeros': ["Final", 1],
-            'Death Incarnate Kazeros': ["Final", 2],
-            'Archdemon Kazeros': ["Final", 2],
-            'Witch of Agony, Serca': ["Serca", 1],
-            'Corvus Tul Rak': ["Serca", 2],
-            'Archbishop Arcenos': ["Cath", 1],
-            'Arcenos, Vanguard of Fanaticism': ["Cath", 2]
-        };
         const baseColors = {
             lvl1: Theme.overlay1,
             lvl2: Theme.teal,
@@ -81,29 +82,49 @@ Singleton {
                 }
             }
         ];
-        const result = ["Name", "Lvl", "Final 1", "Final 2", "Serca 1", "Serca 2", "Cath 1", "Cath 2"];
+        const buffColors = ["#ee9090", "#90ee90", "#eeee90", "#9090ee"];
+        const head = ["Name", "Lvl", "CP", "Final Act: Kazeros G1", "Final Act: Kazeros G2", "Serca G1", "Serca G2", "Horizon Cathedral G1", "Horizon Cathedral G2"];
+        const result = [...head];
         let lastPlayer = "";
         let playerIndex = 0;
         for (const run of data) {
-            if (run.local_player !== lastPlayer) {
-                result.push(run.local_player);
-                for (let i = 0; i < 7; i++) {
+            if (run.name !== lastPlayer) {
+                result.push(run.name);
+                result.push(Math.round(run.itemLevel));
+                result.push(Math.round(run.combatPower));
+                for (let i = 0; i < head.length - 3; i++) {
                     result.push("");
                 }
-                lastPlayer = run.local_player;
+                lastPlayer = run.name;
                 playerIndex++;
-                result[playerIndex * 8] = run.local_player;
-                result[playerIndex * 8 + 1] = Math.round(run.item_level);
             }
-            const [raid, gate] = raidBosses[run.current_boss] ?? [];
-            if (!raid) {
-                continue;
+            for (const raid of Object.keys(run.raids)) {
+                const headIndex = head.findIndex(r => r === raid);
+                if (headIndex === -1) {
+                    continue;
+                }
+                const raidIndex = Math.floor((headIndex - 3) / 2);
+                const gateIndex = (headIndex - 3) % 2;
+                const session = run.raids[raid];
+                const color = raids[raidIndex].colors[session.difficulty];
+                if (session.performance.type === "dps") {
+                    const {
+                        rdps,
+                        dpsCon,
+                        supCon,
+                        ndps,
+                        dps
+                    } = session.performance;
+                    result[playerIndex * head.length + 3 + 2 * raidIndex + gateIndex] = `<b style="color:${color}">${abbreviateNumber(customRound(ndps))}/${abbreviateNumber(customRound(dps))}</b><br>+${customRound(100 * supCon, 0)}%+${customRound(100 * dpsCon, 0)}%`;
+                } else {
+                    const {
+                        rdps,
+                        rcon,
+                        uptimes
+                    } = session.performance;
+                    result[playerIndex * head.length + 3 + 2 * raidIndex + gateIndex] = `${uptimes.map((u, i) => `<b style="color:${buffColors[i]}">${customRound(u * 100, 0)}</b>`).join("·")}<br>+${customRound(100 * rcon, 0)}%`;
+                }
             }
-            const raidIndex = raids.findIndex(r => r.raid === raid);
-            const color = raids[raidIndex].colors[run.difficulty];
-
-            const dps = run.rcon > 20 ? `${Math.round(run.rcon * 10) / 10}%` : `${Math.round((run[root.dpsMode] ?? 0) / 1000 / 1000)}M`;
-            result[playerIndex * 8 + 1 + 2 * raidIndex + gate] = `<b style="color:${color}">${dps}</b>`;
         }
         return result;
     }
@@ -111,17 +132,7 @@ Singleton {
     Process {
         id: fetchData
 
-        command: ["sqlite3", "-json", "/home/synopia/.local/share/xyz.snow.loa-logs/encounters.db", `select
-            max(fight_start) as start,
-            local_player, max(entity.gear_score) as item_level,
-            current_boss,
-            difficulty, max(my_rdps) as rdps, max(my_ndps) as ndps, max(my_dps) as dps, 100*cast(rdps_damage_given as real)/cast((encounter.total_damage_dealt-unbuffed_damage) as real) as rcon
-        from encounter_preview
-        join entity on entity.encounter_id=encounter_preview.id and entity.name=encounter_preview.local_player
-        join encounter on encounter.id=encounter_preview.id
-        where cleared=1 and fight_start>=${root.from} and fight_start<${root.to}
-        group by local_player, current_boss
-        order by item_level desc, local_player, max(fight_start);`]
+        command: ["/home/synopia/.local/bin/loa-state", root.weekOffset, `2>/dev/null`]
 
         stdout: StdioCollector {
             onStreamFinished: {

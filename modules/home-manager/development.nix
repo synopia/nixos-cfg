@@ -27,6 +27,7 @@
     (lib.lowPrio qt5.qttools.bin)
     (lib.lowPrio qt5.qtwayland)
 
+    jetbrains-toolbox
     jetbrains.idea
   ];
 
