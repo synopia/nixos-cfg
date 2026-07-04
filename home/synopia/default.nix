@@ -116,6 +116,11 @@
           text-color = mkLiteral "@on-primary";
         };
 
+        "element-text, element-icon" = {
+          vertical-align = mkLiteral "0.5";
+          background-color = mkLiteral "inherit";
+          text-color = mkLiteral "inherit";
+        };
       };
   };
   # home.file."/.config/rofi/menu.rasi".source =
