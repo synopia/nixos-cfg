@@ -118,7 +118,6 @@
         };
 
         "element-text, element-icon" = {
-          vertical-align = mkLiteral "0.5";
           background-color = mkLiteral "inherit";
           text-color = mkLiteral "inherit";
         };
