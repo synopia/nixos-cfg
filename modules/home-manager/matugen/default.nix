@@ -30,5 +30,14 @@ in
     output_path = "~/.config/kitty/themes/matugen.conf"
     post_hook = "kitty +kitten themes --dump-theme=yes --reload-in=all matugen &> /dev/null"
   '';
-  programs.matugen.enable = true;
+  programs.matugen = {
+    enable = true;
+    variant = "dark";
+    jsonFormat = "hex";
+    type = "scheme-tonal-spot";
+
+    # inherit wallpaper;
+
+    templates = matugenTemplates;
+  };
 }
