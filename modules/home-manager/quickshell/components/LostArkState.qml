@@ -189,7 +189,7 @@ BarPill {
                             required property var modelData
                             required property int index
                             readonly property bool isHeader: modelData.type === "header" || modelData.type === "character"
-                            readonly property bool canPlan: modelData.editable && LOALogs.weekOffset <= 0 && (modelData.text === "" || modelData.planned)
+                            readonly property bool canPlan: modelData.editable && LOALogs.weekOffset <= 0 && ((modelData.text === "" && modelData.clearCount === 0) || modelData.planned)
 
                             Layout.preferredWidth: index % loaOverview.cols === 0 ? 96 : 62
                             Layout.preferredHeight: 26
@@ -208,7 +208,7 @@ BarPill {
                                 textFormat: Text.RichText
                                 horizontalAlignment: Text.AlignHCenter
                                 elide: Text.ElideRight
-                                text: modelData.text
+                                text: modelData.text !== "" ? modelData.text : modelData.statusText
                             }
 
                             MouseArea {

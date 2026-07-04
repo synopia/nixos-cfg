@@ -9,9 +9,9 @@ Singleton {
     id: root
 
     readonly property var laStart: new Date("2024-01-03T09:00:00")
-    readonly property var headers: ["Name", "Lvl", "CP", "Final Act: Kazeros", "Serca", "Horizon Cathedral"]
-    readonly property int detailColumns: 9
-    readonly property var overviewHeaders: ["Name", "Lvl", "CP", "Final", "Serca", "Cath"]
+    property int detailColumns: 3
+    property var overviewHeaders: ["Name", "Lvl", "CP"]
+    property var raidGroupsData: []
     readonly property var hourOptions: [
         {
             label: "17:00",
@@ -100,10 +100,124 @@ Singleton {
         });
         reservations = loaded;
     }
-    function raidGroups() {
+    function staticRaidGroups() {
         return [
             {
+                raid: "Valtan",
+                label: "Valtan",
+                shortLabel: "Valtan",
+                gates: ["Valtan G1", "Valtan G2"],
+                colors: {}
+            },
+            {
+                raid: "Vykas",
+                label: "Vykas",
+                shortLabel: "Vykas",
+                gates: ["Vykas G1", "Vykas G2", "Vykas G3"],
+                colors: {}
+            },
+            {
+                raid: "Clown",
+                label: "Clown",
+                shortLabel: "Clown",
+                gates: ["Clown G1", "Clown G2", "Clown G3"],
+                colors: {}
+            },
+            {
+                raid: "Brelshaza",
+                label: "Brelshaza",
+                shortLabel: "Brel",
+                gates: ["Brelshaza G1", "Brelshaza G2", "Brelshaza G3", "Brelshaza G4", "Brelshaza G5", "Brelshaza G6"],
+                colors: {}
+            },
+            {
+                raid: "Kayangel",
+                label: "Kayangel",
+                shortLabel: "Kayangel",
+                gates: ["Kayangel G1", "Kayangel G2", "Kayangel G3"],
+                colors: {}
+            },
+            {
+                raid: "Akkan",
+                label: "Akkan",
+                shortLabel: "Akkan",
+                gates: ["Akkan G1", "Akkan G2", "Akkan G3"],
+                colors: {}
+            },
+            {
+                raid: "Ivory Tower",
+                label: "Ivory Tower",
+                shortLabel: "Ivory",
+                gates: ["Ivory Tower G1", "Ivory Tower G2", "Ivory Tower G3", "Ivory Tower G4"],
+                colors: {}
+            },
+            {
+                raid: "Thaemine",
+                label: "Thaemine",
+                shortLabel: "Thae",
+                gates: ["Thaemine G1", "Thaemine G2", "Thaemine G3", "Thaemine G4"],
+                colors: {}
+            },
+            {
+                raid: "Echidna",
+                label: "Echidna",
+                shortLabel: "Echidna",
+                gates: ["Echidna G1", "Echidna G2"],
+                colors: {}
+            },
+            {
+                raid: "Behemoth",
+                label: "Behemoth",
+                shortLabel: "Behe",
+                gates: ["Behemoth G1", "Behemoth G2"],
+                colors: {}
+            },
+            {
+                raid: "Assault: Crimson Abyss",
+                label: "Assault: Crimson Abyss",
+                shortLabel: "Crimson",
+                gates: ["Assault: Crimson Abyss G1"],
+                colors: {}
+            },
+            {
+                raid: "Assault: Flame of Destruction",
+                label: "Assault: Flame of Destruction",
+                shortLabel: "Flame",
+                gates: ["Assault: Flame of Destruction G1"],
+                colors: {}
+            },
+            {
+                raid: "Aegir",
+                label: "Aegir",
+                shortLabel: "Aegir",
+                gates: ["Aegir G1", "Aegir G2"],
+                colors: {}
+            },
+            {
+                raid: "Act 2: Brelshaza",
+                label: "Act 2: Brelshaza",
+                shortLabel: "Act 2",
+                gates: ["Act 2: Brelshaza G1", "Act 2: Brelshaza G2"],
+                colors: {}
+            },
+            {
+                raid: "Act 3: Mordum",
+                label: "Act 3: Mordum",
+                shortLabel: "Act 3",
+                gates: ["Act 3: Mordum G1", "Act 3: Mordum G2", "Act 3: Mordum G3"],
+                colors: {}
+            },
+            {
+                raid: "Act 4: Armoche",
+                label: "Act 4: Armoche",
+                shortLabel: "Act 4",
+                gates: ["Act 4: Armoche G1", "Act 4: Armoche G2"],
+                colors: {}
+            },
+            {
                 raid: "Final",
+                label: "Final Act: Kazeros",
+                shortLabel: "Final",
                 gates: ["Final Act: Kazeros G1", "Final Act: Kazeros G2"],
                 colors: {
                     "Normal": Theme.text,
@@ -112,6 +226,8 @@ Singleton {
             },
             {
                 raid: "Serca",
+                label: "Serca",
+                shortLabel: "Serca",
                 gates: ["Serca G1", "Serca G2"],
                 colors: {
                     "Normal": Theme.text,
@@ -121,6 +237,8 @@ Singleton {
             },
             {
                 raid: "Cath",
+                label: "Horizon Cathedral",
+                shortLabel: "Cath",
                 gates: ["Horizon Cathedral G1", "Horizon Cathedral G2"],
                 colors: {
                     "Level 1": Theme.text,
@@ -130,16 +248,96 @@ Singleton {
             }
         ];
     }
+    function raidGroups() {
+        return raidGroupsData.length > 0 ? raidGroupsData : staticRaidGroups();
+    }
+    function defaultDifficultyColor(difficulty) {
+        switch (difficulty) {
+        case "Hard":
+        case "Extreme":
+        case "Level 2":
+            return Theme.yellow;
+        case "Nightmare":
+        case "Inferno":
+        case "The First":
+        case "Level 3":
+            return Theme.red;
+        default:
+            return Theme.text;
+        }
+    }
+    function gateRaidName(gate) {
+        return (gate || "").replace(/\s+G\d+$/, "");
+    }
+    function gateNumber(gate) {
+        const match = (gate || "").match(/\s+G(\d+)$/);
+        return match ? Number(match[1]) : 0;
+    }
+    function staticGroupForRaid(raid) {
+        const name = gateRaidName(raid);
+        return staticRaidGroups().find(group => group.raid === raid || group.label === raid || group.shortLabel === raid || group.gates.includes(raid) || group.label === name) || null;
+    }
+    function raidOrder(group) {
+        const index = staticRaidGroups().findIndex(staticGroup => staticGroup.raid === group.raid || staticGroup.label === group.label);
+        return index >= 0 ? index : 1000;
+    }
+    function gateOrder(group, gate) {
+        const known = staticGroupForRaid(group.raid) || staticGroupForRaid(group.label);
+        const index = known ? known.gates.indexOf(gate) : -1;
+        return index >= 0 ? index : 1000 + gateNumber(gate);
+    }
+    function buildRaidGroups(data) {
+        const groups = [];
+        const byName = {};
+        for (const run of data) {
+            const raids = run.raids || {};
+            for (const gate of Object.keys(raids)) {
+                const label = gateRaidName(gate);
+                if (!label)
+                    continue;
+
+                if (!byName[label]) {
+                    const known = staticGroupForRaid(label);
+                    const group = {
+                        raid: known ? known.raid : label,
+                        label: known ? known.label : label,
+                        shortLabel: known ? known.shortLabel : label,
+                        gates: [],
+                        colors: Object.assign({}, known ? known.colors : {})
+                    };
+                    byName[label] = group;
+                    groups.push(group);
+                }
+
+                const group = byName[label];
+                if (!group.gates.includes(gate))
+                    group.gates.push(gate);
+
+                const session = raids[gate];
+                if (session && session.difficulty && !group.colors[session.difficulty])
+                    group.colors[session.difficulty] = defaultDifficultyColor(session.difficulty);
+            }
+        }
+
+        for (const group of groups) {
+            group.gates.sort((a, b) => gateOrder(group, a) - gateOrder(group, b) || a.localeCompare(b));
+        }
+        groups.sort((a, b) => raidOrder(a) - raidOrder(b) || a.label.localeCompare(b.label));
+        return groups;
+    }
     function raidGroup(raid) {
         const canonical = canonicalRaid(raid);
-        return raidGroups().find(group => group.raid === canonical) || null;
+        return raidGroups().find(group => group.raid === canonical) || staticGroupForRaid(canonical);
     }
     function canonicalRaid(raid) {
         for (const group of raidGroups()) {
             if (raid === group.raid || group.gates.includes(raid))
                 return group.raid;
         }
-        return raid || "";
+        const known = staticGroupForRaid(raid);
+        if (known)
+            return known.raid;
+        return gateRaidName(raid) || "";
     }
     function difficultyOptions(raid) {
         const group = raidGroup(raid);
@@ -187,6 +385,9 @@ Singleton {
             if (group.raid === canonical)
                 return [group.raid].concat(group.gates);
         }
+        const known = staticGroupForRaid(canonical);
+        if (known)
+            return [known.raid].concat(known.gates);
         return [canonical];
     }
     function setReservation(character, raid, weekday, hour, difficulty, description) {
@@ -243,9 +444,11 @@ Singleton {
             return "";
         return `<b style="color:${reservation.color}">${weekdayLabel(reservation.weekday)} ${timeLabel(reservation.hour)}</b><br>${escapeHtml(reservation.description)}`;
     }
-    function makeCell(text, type, character, raid, editable, planned, inactive, span) {
+    function makeCell(text, type, character, raid, editable, planned, inactive, span, statusText, clearCount) {
         return {
             text: text,
+            statusText: statusText || "",
+            clearCount: clearCount || 0,
             type: type,
             character: character || "",
             raid: raid || "",
@@ -253,6 +456,21 @@ Singleton {
             planned: planned || null,
             inactive: !!inactive,
             span: span || 1
+        };
+    }
+    function overviewRaidMarks(group, characterRaids) {
+        let cleared = 0;
+        const marks = group.gates.map(gate => {
+            const session = characterRaids[gate];
+            if (session) {
+                cleared++;
+                return `<b style="color:${raidColor(group.raid, session.difficulty)}">✓</b>`;
+            }
+            return `<b style="color:${Theme.overlay1}">○</b>`;
+        });
+        return {
+            text: marks.join(""),
+            cleared: cleared
         };
     }
     function prevWeek() {
@@ -271,6 +489,9 @@ Singleton {
             dpsMode = mode;
     }
     function rebuildTables() {
+        raidGroupsData = buildRaidGroups(rawData);
+        detailColumns = 3 + raidGroupsData.reduce((total, group) => total + group.gates.length, 0);
+        overviewHeaders = ["Name", "Lvl", "CP"].concat(raidGroupsData.map(group => group.shortLabel));
         data = buildTable(rawData);
         overviewData = buildOverviewTable(rawData);
     }
@@ -297,7 +518,7 @@ Singleton {
         for (const run of data) {
             if (!summaries[run.name])
                 summaries[run.name] = {};
-            for (const group of raidGroups()) {
+            for (const group of raidGroupsData) {
                 const current = summaries[run.name][group.raid] || 0;
                 const cleared = group.gates.filter(gate => run.raids[gate]).length;
                 summaries[run.name][group.raid] = Math.max(current, cleared);
@@ -308,17 +529,19 @@ Singleton {
     function completedRaidCount(summaries, character) {
         let count = 0;
         const characterSummary = summaries[character] || {};
-        for (const group of raidGroups()) {
+        for (const group of raidGroupsData) {
             if ((characterSummary[group.raid] || 0) > 0)
                 count++;
         }
         return count;
     }
     function buildTable(data) {
-        const raids = raidGroups();
+        const raids = raidGroupsData;
         const buffColors = ["#ee9090", "#90ee90", "#eeee90", "#9090ee"];
         const summaries = characterRaidSummaries(data);
-        const result = [makeCell("Name", "header"), makeCell("Lvl", "header"), makeCell("CP", "header"), makeCell("Final Act: Kazeros", "header", "", "", false, null, false, 2), makeCell("Serca", "header", "", "", false, null, false, 2), makeCell("Horizon Cathedral", "header", "", "", false, null, false, 2)];
+        const result = [makeCell("Name", "header"), makeCell("Lvl", "header"), makeCell("CP", "header")];
+        for (const group of raids)
+            result.push(makeCell(group.label, "header", "", "", false, null, false, group.gates.length));
         let lastPlayer = "";
         for (const run of data) {
             if (run.name === lastPlayer)
@@ -330,7 +553,7 @@ Singleton {
                     Object.assign(characterRaids, characterRun.raids);
             }
 
-            const inactive = completedRaidCount(summaries, run.name) >= 3;
+            const inactive = raids.length > 0 && completedRaidCount(summaries, run.name) >= raids.length;
             result.push(makeCell(run.name, "character", "", "", false, null, inactive));
             result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
             result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
@@ -340,7 +563,7 @@ Singleton {
                 const reservationText = plannedText(reservation);
                 const hasRunData = group.gates.some(gate => characterRaids[gate]);
                 if (reservationText !== "" && !hasRunData) {
-                    result.push(makeCell(reservationText, "raid", run.name, group.raid, weekOffset <= 0, reservation, inactive, 2));
+                    result.push(makeCell(reservationText, "raid", run.name, group.raid, weekOffset <= 0, reservation, inactive, group.gates.length));
                     continue;
                 }
 
@@ -348,7 +571,7 @@ Singleton {
                     const session = characterRaids[gate];
                     const cell = makeCell("", "raid", run.name, group.raid, weekOffset <= 0, null, inactive);
                     if (session) {
-                        const color = group.colors[session.difficulty];
+                        const color = raidColor(group.raid, session.difficulty);
                         if (session.performance.type === "dps") {
                             const {
                                 rdps,
@@ -375,7 +598,7 @@ Singleton {
         return result;
     }
     function buildOverviewTable(data) {
-        const raids = raidGroups();
+        const raids = raidGroupsData;
         const head = overviewHeaders;
         const summaries = characterRaidSummaries(data);
         const result = head.map(h => makeCell(h, "header"));
@@ -384,16 +607,21 @@ Singleton {
             if (run.name === lastPlayer)
                 continue;
 
-            const inactive = completedRaidCount(summaries, run.name) >= 3;
+            const characterRaids = {};
+            for (const characterRun of data) {
+                if (characterRun.name === run.name)
+                    Object.assign(characterRaids, characterRun.raids);
+            }
+
+            const inactive = raids.length > 0 && completedRaidCount(summaries, run.name) >= raids.length;
             result.push(makeCell(run.name, "character", "", "", false, null, inactive));
             result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
             result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
 
             for (const group of raids) {
-                const cleared = (summaries[run.name] || {})[group.raid] || 0;
-                const reservation = !cleared ? reservations[reservationKey(run.name, group.raid)] : undefined;
-                const clearText = cleared > 0 ? `${cleared}/${group.gates.length}` : "";
-                result.push(makeCell(plannedText(reservation) || clearText, "raid", run.name, group.raid, weekOffset <= 0 && (cleared === 0 || reservation), reservation || null, inactive));
+                const marks = overviewRaidMarks(group, characterRaids);
+                const reservation = !marks.cleared ? reservations[reservationKey(run.name, group.raid)] : undefined;
+                result.push(makeCell(plannedText(reservation), "raid", run.name, group.raid, weekOffset <= 0 && (marks.cleared === 0 || reservation), reservation || null, inactive, 1, marks.text, marks.cleared));
             }
             lastPlayer = run.name;
         }
