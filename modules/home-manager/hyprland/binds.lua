@@ -1,8 +1,9 @@
 local terminal = "kitty"
 local browser = "google-chrome"
 local file_manager = "dolphin"
-local launcher = "rofi -show drun"
-local screenshot_region = [[sh -c 'state="${XDG_RUNTIME_DIR:-/tmp}/quickshell-screenshot-region"; touch "$state"; trap "rm -f \"$state\"" EXIT; sleep 0.1; geometry="$(slurp)" || exit 1; grim -g "$geometry" - | wl-copy -t image/png']]
+local launcher = "rofi -modi drun -display-drun 'Apps   ' -show drun -theme ~/.config/rofi/menu.rasi"
+local screenshot_region =
+[[sh -c 'state="${XDG_RUNTIME_DIR:-/tmp}/quickshell-screenshot-region"; touch "$state"; trap "rm -f \"$state\"" EXIT; sleep 0.1; geometry="$(slurp)" || exit 1; grim -g "$geometry" - | wl-copy -t image/png']]
 local workspaces_per_monitor = hypr_user_config.workspaces_per_monitor
 local workspace_count = workspaces_per_monitor * #hypr_user_config.workspace_monitors
 
