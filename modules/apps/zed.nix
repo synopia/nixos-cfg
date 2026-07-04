@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.zeditor = {
+    programs.zed-editor = {
       enable = true;
       extensions = [
         "nix"
