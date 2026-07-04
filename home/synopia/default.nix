@@ -59,7 +59,7 @@
       drun-display-format = "{name}";
     };
   };
-  home.file."/.config/rofi/menu.rasi".source = lib.mkOutOfStoreSymlink home.file."/dev/menu.rasi";
+  home.file."/.config/rofi/menu.rasi".source = lib.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
 
   home.packages = with pkgs; [
     htop
