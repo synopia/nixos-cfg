@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  config,
   ...
 }:
 
@@ -60,7 +61,7 @@
     };
   };
   home.file."/.config/rofi/menu.rasi".source =
-    lib.file.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
+    config.lib.file.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
 
   home.packages = with pkgs; [
     htop
