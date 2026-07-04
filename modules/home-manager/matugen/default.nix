@@ -38,6 +38,6 @@ in
 
     # inherit wallpaper;
 
-    templates = matugenTemplates;
+    # templates = matugenTemplates;
   };
 }
