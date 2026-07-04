@@ -32,7 +32,7 @@ in
 
     [templates.rofi]
     input_path = '/home/synopia/nixos-config/modules/home-manager/matugen/templates/rofi-colors.rasi'
-    output_path = '~/.config/rofi/colors.rasi'
+    output_path = '~/.local/share/rofi/themes/colors.rasi'
   '';
   programs.matugen = {
     enable = true;

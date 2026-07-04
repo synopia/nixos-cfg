@@ -65,12 +65,14 @@
       in
       {
         "*" = {
-          background-color = mkLiteral "#000000";
+          background-color = mkLiteral "@surface";
+          text-color = mkLiteral "@on-surface";
+          font = "Iosevka Nerd Font 16";
         };
       };
   };
-  home.file."/.config/rofi/menu.rasi".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
+  # home.file."/.config/rofi/menu.rasi".source =
+  # config.lib.file.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
 
   home.packages = with pkgs; [
     htop
