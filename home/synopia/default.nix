@@ -54,11 +54,7 @@
   programs.rofi = {
     enable = true;
     modes = [ "drun" ];
-    extraConfig = {
-      show-icons = true;
-      icon-theme = "Papirus-Dar";
-      drun-display-format = "{name}";
-    };
+
     theme =
       let
         inherit (config.lib.formats.rasi) mkLiteral;
