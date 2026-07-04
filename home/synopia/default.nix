@@ -117,8 +117,8 @@
           text-color = mkLiteral "@on-primary";
         };
 
-        "element-text" = {
-          vertical-align = 0.5;
+        "element-text, element-icon" = {
+          vertical-align = mkLiteral "0.5";
           background-color = mkLiteral "inherit";
           text-color = mkLiteral "inherit";
         };
