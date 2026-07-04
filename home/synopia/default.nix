@@ -64,6 +64,7 @@
         inherit (config.lib.formats.rasi) mkLiteral;
       in
       {
+        "@import" = "colors.rasi";
         "*" = {
           background-color = mkLiteral "@surface";
           text-color = mkLiteral "@on-surface";
