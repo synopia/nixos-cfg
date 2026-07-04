@@ -59,6 +59,15 @@
       icon-theme = "Papirus-Dar";
       drun-display-format = "{name}";
     };
+    theme =
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in
+      {
+        "*" = {
+          background-color = mkLiteral "#000000";
+        };
+      };
   };
   home.file."/.config/rofi/menu.rasi".source =
     config.lib.file.mkOutOfStoreSymlink "/home/synopia/dev/menu.rasi";
