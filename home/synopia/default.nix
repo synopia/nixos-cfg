@@ -59,64 +59,8 @@
       drun-display-format = "{name}";
     };
   };
-  home.file."/.config/rofi/menu.rasi".text = ''
-        @import "colors.rasi"
+  home.file."/.config/rofi/menu.rasi".source = lib.mkOutOfStoreSymlink home.file."/dev/menu.rasi";
 
-        /**
-         * ROFI Color theme
-         * User: Qball
-         * Copyright: Dave Davenport
-         */
-
-        * {
-            background-color: @surface;
-            text-color: @on-surface;
-            font: "Iosevka Nerd Font 16";
-        }
-
-        window {
-            anchor: north;
-            location: north;
-            width: 100%;
-            padding: 4px;
-            children: [ horibox ];
-            background-color: @surface;
-        }
-
-    /*    horibox {
-            orientation: horizontal;
-            children: [ prompt, entry, listview ];
-        }
-
-        listview {
-            layout: horizontal;
-            spacing: 5px;
-            lines: 100;
-        }
-    */
-        entry {
-            expand: false;
-            width: 10em;
-        }
-
-        element {
-            orientation: horizontal;
-            spacing: 5px;
-            children: [ element-text, element-icon ];
-
-        }
-
-        element selected {
-            background-color: @primary-fixed-dim;
-            text-color: @on-primary;
-        }
-
-        element-text, element-icon {
-          background-color: inherit;
-          text-color: inherit;
-        }
-
-  '';
   home.packages = with pkgs; [
     htop
     btop
