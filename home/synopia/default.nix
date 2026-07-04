@@ -107,7 +107,7 @@
           ];
         };
 
-        "element-icon" = {
+        "#element-icon" = {
           size = "2.5em";
         };
 
