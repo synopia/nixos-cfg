@@ -16,6 +16,9 @@ in
   home.file.".config/matugen/config.toml".text = ''
     [config]
 
+    [templates.quickshell]
+    input_path = 'path/to/template'
+    output_path = '~/.local/state/quickshell/generated/colors.json'
   '';
   programs.matugen.enable = true;
 }

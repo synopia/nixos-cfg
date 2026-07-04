@@ -11,6 +11,6 @@
     ./wireplumber
     # ./theme
     ./quickshell
-    ./matugen.nix
+    ./matugen
   ];
 }
