@@ -4,7 +4,7 @@
     ./nix.nix
     ./boot.nix
     ./locale.nix
-    ./stylix.nix
+    # ./stylix.nix
     ./sddm.nix
     ./hyprland.nix
     ./audio.nix
