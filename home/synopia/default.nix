@@ -70,6 +70,64 @@
           text-color = mkLiteral "@on-surface";
           font = "Iosevka Nerd Font 16";
         };
+        "window" = {
+          anchor = mkLiteral "center";
+          location = mkLiteral "center";
+          padding = mkLiteral "4px";
+          width = mkLiteral "20em";
+          children = [
+            mkLiteral
+            "horibox"
+          ];
+          background-color = mkLiteral "@surface";
+        };
+        "horibox" = {
+          orientation = mkLiteral "vertical";
+          children = [
+            mkLiteral
+            "prompt"
+            mkLiteral
+            "entry"
+            mkLiteral
+            "listview"
+          ];
+        };
+        "listview" = {
+          layou = mkLiteral "vertical";
+          spacing = mkLiteral "5px";
+          lines = mkLiteral "10";
+        };
+        entry = {
+          expand = false;
+          cursor = mkLiteral "pointer";
+          width = mkLiteral "10em";
+        };
+        element = {
+          orientation = mkLiteral "horizontal";
+          spacing = mkLiteral "5px";
+          children = [
+            mkLiteral
+            "element-text"
+            mkLiteral
+            "element-icon"
+          ];
+        };
+
+        "element-icon" = {
+          size = "2.5em";
+        };
+
+        "element selected" = {
+          background-color = mkLiteral "@primary";
+          text-color = mkLiteral "@on-primary";
+        };
+
+        "element-text, element-icon" = {
+          vertical-align = 0.5;
+          background-color = mkLiteral "inherit";
+          text-color = mkLiteral "inherit";
+        };
+
       };
   };
   # home.file."/.config/rofi/menu.rasi".source =
