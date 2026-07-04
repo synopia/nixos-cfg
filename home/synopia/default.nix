@@ -75,8 +75,7 @@
           location = mkLiteral "center";
           padding = mkLiteral "4px";
           width = mkLiteral "20em";
-          children = [
-            mkLiteral
+          children = map mkLiteral [
             "horibox"
           ];
           background-color = mkLiteral "@surface";
