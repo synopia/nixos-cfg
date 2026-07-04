@@ -56,7 +56,7 @@
     modes = [ "drun" ];
     extraConfig = {
       show-icons = true;
-      icon-theme = "Papirus-Dark";
+      icon-theme = "Papirus-Dar";
       drun-display-format = "{name}";
     };
   };
