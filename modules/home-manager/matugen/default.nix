@@ -1,4 +1,9 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  config,
+  default,
+  ...
+}:
 let
   cfgdir = "${config.home.homeDirectory}/.config";
 in
@@ -17,7 +22,7 @@ in
     [config]
 
     [templates.quickshell]
-    input_path = 'path/to/template'
+    input_path = '/home/synopia/nixos-config/modules/home-manager/matugen/templates/quickshell.json'
     output_path = '~/.local/state/quickshell/generated/colors.json'
   '';
   programs.matugen.enable = true;
