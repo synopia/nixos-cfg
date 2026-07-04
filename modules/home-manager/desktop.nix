@@ -60,6 +60,7 @@
     };
   };
 
+  # home.configFile."rofi/config.rasi".source = "/home/synopia/rofi/config.rasi";
   home.pointerCursor = {
     name = lib.mkForce "Bibata-Modern-Classic";
     package = lib.mkForce pkgs.bibata-cursors;
