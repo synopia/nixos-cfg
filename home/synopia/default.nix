@@ -83,12 +83,9 @@
         };
         "horibox" = {
           orientation = mkLiteral "vertical";
-          children = [
-            mkLiteral
+          children = map mkLiteral [
             "prompt"
-            mkLiteral
             "entry"
-            mkLiteral
             "listview"
           ];
         };
@@ -105,10 +102,8 @@
         element = {
           orientation = mkLiteral "horizontal";
           spacing = mkLiteral "5px";
-          children = [
-            mkLiteral
+          children = map mkLiteral [
             "element-text"
-            mkLiteral
             "element-icon"
           ];
         };
