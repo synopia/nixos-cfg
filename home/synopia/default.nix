@@ -53,7 +53,7 @@
   programs.rofi = {
     enable = true;
     modes = [ "drun" ];
-    theme = home.homeDirectory.".config/rofi/colors.rasi";
+    theme = "/home/synopia/.config/rofi/colors.rasi";
     extraConfig = {
       show-icons = true;
       icon-theme = "Papirus-Dark";
