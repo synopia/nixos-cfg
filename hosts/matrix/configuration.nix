@@ -12,6 +12,7 @@
   ];
   environment.systemPackages = with pkgs; [
     inputs.matugen.packages.${stdenv.hostPlatform.system}.default
+    rofi
   ];
 
   # catppuccin = {

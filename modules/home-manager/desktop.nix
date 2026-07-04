@@ -6,9 +6,6 @@
 }:
 {
 
-  environment.systemPackages = with pkgs; [
-    rofi
-  ];
   home.packages = with pkgs; [
     loupe # images
     clapper # videos
