@@ -38,9 +38,9 @@ in
           lua-language-server = {
             settings = {
               Lua = {
-                workspace.library = [
-                  "${config.wayland.windowManager.hyprland.package}/share/hypr/stubs"
-                ];
+                # workspace.library = [
+                #   "${config.wayland.windowManager.hyprland.package}/share/hypr/stubs"
+                # ];
               };
             };
           };
