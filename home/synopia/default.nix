@@ -89,7 +89,7 @@
           ];
         };
         "listview" = {
-          layou = mkLiteral "vertical";
+          layout = mkLiteral "vertical";
           spacing = mkLiteral "5px";
           lines = mkLiteral "10";
         };
