@@ -59,7 +59,7 @@
       drun-display-format = "{name}";
     };
   };
-  "/home/synopia/.config/rofi/menu.rasi".text = ''
+  home.file."/.config/rofi/menu.rasi".text = ''
     @import "colors.rasi"
 
     /**
