@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -10,6 +10,10 @@
     inputs.home-manager.nixosModules.home-manager
 
   ];
+  environment.systemPackages = with pkgs; [
+    inputs.matugen.packages.${stdenv.hostPlatform.system}.default
+  ];
+
   # catppuccin = {
   # enable = true;
   # autoEnable = true;
