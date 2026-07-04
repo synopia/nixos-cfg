@@ -29,7 +29,7 @@ MouseArea {
     Rectangle {
         anchors.fill: parent
         radius: width / 2
-        color: root.containsMouse ? Theme.surface2 : "transparent"
+        color: root.containsMouse ? Colors.md3.surface_container_highest : "transparent"
     }
 
     IconImage {

@@ -48,7 +48,7 @@ BarPill {
     padX: 9
 
     content: Text {
-        color: root.statusMuted ? Theme.red : Theme.text
+        color: root.statusMuted ? Colors.md3.error : Colors.md3.on_surface
         font.pixelSize: 14
         text: root.volumeIcon()
     }
@@ -117,8 +117,8 @@ BarPill {
                     topMargin: 8
                     horizontalCenter: parent.horizontalCenter
                 }
-                color: Theme.crust
-                border.color: Theme.surface1
+                color: Colors.md3.background
+                border.color: Colors.md3.surface_container_high
                 border.width: 1
                 radius: 8
                 implicitWidth: Math.max(sliderRow.implicitWidth, emptyState.implicitWidth) + 24
@@ -154,7 +154,7 @@ BarPill {
 
                         Layout.alignment: Qt.AlignHCenter
                         visible: !Pipewire.ready
-                        color: Theme.subtext0
+                        color: Colors.md3.on_surface_variant
                         font.pixelSize: 10
                         text: "PipeWire"
                     }
@@ -242,7 +242,7 @@ BarPill {
         Text {
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: 34
-            color: sink.nodeMuted ? Theme.red : sink.isDefault ? Theme.accent : Theme.text
+            color: sink.nodeMuted ? Colors.md3.error : sink.isDefault ? Colors.md3.primary : Colors.md3.on_surface
             font.pixelSize: 13
             horizontalAlignment: Text.AlignHCenter
             text: sink.nodeMuted ? "󰝟" : "󰕾"
@@ -274,7 +274,7 @@ BarPill {
                 width: 6
                 height: volumeSlider.availableHeight
                 radius: 3
-                color: Theme.surface0
+                color: Colors.md3.surface_container
 
                 Rectangle {
                     anchors {
@@ -284,7 +284,7 @@ BarPill {
                     }
                     height: parent.height * volumeSlider.position
                     radius: 3
-                    color: sink.nodeMuted ? Theme.overlay1 : sink.isDefault ? Theme.accent : Theme.blue
+                    color: sink.nodeMuted ? Colors.md3.outline : sink.isDefault ? Colors.md3.primary : Colors.base16.base0d
                 }
             }
 
@@ -294,8 +294,8 @@ BarPill {
                 width: 16
                 height: 16
                 radius: 8
-                color: sink.nodeMuted ? Theme.surface2 : Theme.text
-                border.color: Theme.crust
+                color: sink.nodeMuted ? Colors.md3.surface_container_highest : Colors.md3.on_surface
+                border.color: Colors.md3.background
                 border.width: 1
             }
         }
@@ -303,7 +303,7 @@ BarPill {
         Text {
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: 42
-            color: Theme.subtext0
+            color: Colors.md3.on_surface_variant
             font.pixelSize: 10
             horizontalAlignment: Text.AlignHCenter
             text: Math.round(sink.nodeVolume * 100) + "%"
@@ -312,7 +312,7 @@ BarPill {
         Text {
             Layout.alignment: Qt.AlignHCenter
             Layout.preferredWidth: 60
-            color: Theme.subtext1
+            color: Colors.md3.on_surface_variant
             elide: Text.ElideRight
             font.pixelSize: 9
             horizontalAlignment: Text.AlignHCenter
@@ -330,13 +330,13 @@ BarPill {
             Rectangle {
                 anchors.fill: parent
                 radius: 6
-                color: parent.containsMouse ? Theme.surface1 : Theme.surface0
-                border.color: Theme.surface1
+                color: parent.containsMouse ? Colors.md3.surface_container_high : Colors.md3.surface_container
+                border.color: Colors.md3.surface_container_high
                 border.width: 1
 
                 Text {
                     anchors.centerIn: parent
-                    color: sink.nodeMuted ? Theme.red : Theme.subtext0
+                    color: sink.nodeMuted ? Colors.md3.error : Colors.md3.on_surface_variant
                     font.pixelSize: 10
                     text: sink.nodeMuted ? "on" : "off"
                 }

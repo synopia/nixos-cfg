@@ -51,7 +51,7 @@ Scope {
 
             Rectangle {
                 anchors.fill: parent
-                color: Theme.crust
+                color: Colors.md3.background
                 opacity: 0.86
 
                 MouseArea {

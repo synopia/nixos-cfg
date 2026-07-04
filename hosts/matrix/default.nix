@@ -10,7 +10,7 @@
     };
 
     modules = [
-      # inputs.stylix.nixosModules.stylix
+      inputs.matugen.nixosModules.default
 
       ./configuration.nix
     ];

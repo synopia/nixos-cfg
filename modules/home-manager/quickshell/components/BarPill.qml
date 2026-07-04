@@ -9,8 +9,8 @@ Rectangle {
     property int padY: 4
 
     radius: height / 2
-    color: Theme.surface0
-    border.color: Theme.surface1
+    color: Colors.md3.surface_container
+    border.color: Colors.md3.surface_container_high
     border.width: 1
 
     implicitWidth: slot.implicitWidth + padX * 2

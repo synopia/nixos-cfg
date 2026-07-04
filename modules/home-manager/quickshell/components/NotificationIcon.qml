@@ -14,10 +14,10 @@ BarPill {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             color: NotificationService.doNotDisturb
-                ? Theme.red
+                ? Colors.md3.error
                 : NotificationService.history.length > 0
-                    ? Theme.accent
-                    : Theme.subtext0
+                    ? Colors.md3.primary
+                    : Colors.md3.on_surface_variant
             font.pixelSize: 13
             font.weight: Font.Bold
             text: NotificationService.doNotDisturb ? "×" : "●"
@@ -25,7 +25,7 @@ BarPill {
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.text
+            color: Colors.md3.on_surface
             font.pixelSize: 10
             font.weight: Font.DemiBold
             text: NotificationService.history.length.toString()

@@ -13,8 +13,8 @@ Rectangle {
     width: ListView.view?.width ?? 360
     implicitHeight: content.implicitHeight + 20
     radius: 10
-    color: Theme.surface0
-    border.color: hovered ? Theme.accent : Theme.surface1
+    color: Colors.md3.surface_container
+    border.color: hovered ? Colors.md3.primary : Colors.md3.surface_container_high
     border.width: 1
 
     property bool hovered: false
@@ -35,11 +35,11 @@ Rectangle {
                 Layout.preferredWidth: 26
                 Layout.preferredHeight: 26
                 radius: 7
-                color: Theme.surface1
+                color: Colors.md3.surface_container_high
 
                 Text {
                     anchors.centerIn: parent
-                    color: Theme.accent
+                    color: Colors.md3.primary
                     font.pixelSize: 13
                     font.weight: Font.Bold
                     text: {
@@ -55,7 +55,7 @@ Rectangle {
 
                 Text {
                     Layout.fillWidth: true
-                    color: Theme.subtext0
+                    color: Colors.md3.on_surface_variant
                     elide: Text.ElideRight
                     font.pixelSize: 9
                     text: root.notification.appName || "Notification"
@@ -63,7 +63,7 @@ Rectangle {
 
                 Text {
                     Layout.fillWidth: true
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     elide: Text.ElideRight
                     font.pixelSize: 12
                     font.weight: Font.DemiBold
@@ -72,7 +72,7 @@ Rectangle {
             }
 
             Text {
-                color: Theme.overlay1
+                color: Colors.md3.outline
                 font.pixelSize: 9
                 text: {
                     const date = new Date(root.notification.receivedAtEpochMs)
@@ -86,7 +86,7 @@ Rectangle {
         Text {
             visible: text.length > 0
             Layout.fillWidth: true
-            color: Theme.subtext1
+            color: Colors.md3.on_surface_variant
             font.pixelSize: 10
             maximumLineCount: root.compact ? 3 : 6
             elide: Text.ElideRight

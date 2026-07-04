@@ -153,13 +153,13 @@ Item {
                 width: root.cellWidth
                 height: root.cellHeight
                 radius: 14
-                color: dragHovered ? Theme.surface2 : Theme.mantle
+                color: dragHovered ? Colors.md3.surface_container_highest : Colors.md3.surface_container_lowest
                 border.width: active || dragHovered ? 2 : 1
                 border.color: dragHovered
-                    ? Theme.green
+                    ? Colors.base16.base0b
                     : active
-                        ? Theme.accent
-                        : Theme.surface1
+                        ? Colors.md3.primary
+                        : Colors.md3.surface_container_high
 
                 Text {
                     anchors {
@@ -169,7 +169,7 @@ Item {
                     }
                     z: 20
                     text: workspace.workspaceId
-                    color: workspace.active ? Theme.accent : Theme.subtext0
+                    color: workspace.active ? Colors.md3.primary : Colors.md3.on_surface_variant
                     font.pixelSize: 13
                     font.weight: Font.Bold
                 }
@@ -286,11 +286,11 @@ Item {
                             Rectangle {
                                 anchors.fill: parent
                                 radius: 7
-                                color: Theme.base
+                                color: Colors.md3.surface
                                 border.width: 1
                                 border.color: hoverHandler.hovered
-                                    ? Theme.accent
-                                    : Theme.surface2
+                                    ? Colors.md3.primary
+                                    : Colors.md3.surface_container_highest
                                 clip: true
 
                                 ScreencopyView {
@@ -304,7 +304,7 @@ Item {
                                         anchors.fill: parent
                                         color: "transparent"
                                         border.width: 1
-                                        border.color: Theme.surface2
+                                        border.color: Colors.md3.surface_container_highest
                                     }
 
                                     IconImage {

@@ -220,8 +220,8 @@ Singleton {
                 shortLabel: "Final",
                 gates: ["Final Act: Kazeros G1", "Final Act: Kazeros G2"],
                 colors: {
-                    "Normal": Theme.text,
-                    "Hard": Theme.yellow
+                    "Normal": Colors.md3.on_surface,
+                    "Hard": Colors.base16.base0a
                 }
             },
             {
@@ -230,9 +230,9 @@ Singleton {
                 shortLabel: "Serca",
                 gates: ["Serca G1", "Serca G2"],
                 colors: {
-                    "Normal": Theme.text,
-                    "Hard": Theme.yellow,
-                    "Nightmare": Theme.red
+                    "Normal": Colors.md3.on_surface,
+                    "Hard": Colors.base16.base0a,
+                    "Nightmare": Colors.md3.error
                 }
             },
             {
@@ -241,9 +241,9 @@ Singleton {
                 shortLabel: "Cath",
                 gates: ["Horizon Cathedral G1", "Horizon Cathedral G2"],
                 colors: {
-                    "Level 1": Theme.text,
-                    "Level 2": Theme.yellow,
-                    "Level 3": Theme.red
+                    "Level 1": Colors.md3.on_surface,
+                    "Level 2": Colors.base16.base0a,
+                    "Level 3": Colors.md3.error
                 }
             }
         ];
@@ -256,14 +256,14 @@ Singleton {
         case "Hard":
         case "Extreme":
         case "Level 2":
-            return Theme.yellow;
+            return Colors.base16.base0a;
         case "Nightmare":
         case "Inferno":
         case "The First":
         case "Level 3":
-            return Theme.red;
+            return Colors.md3.error;
         default:
-            return Theme.text;
+            return Colors.md3.on_surface;
         }
     }
     function gateRaidName(gate) {
@@ -358,8 +358,8 @@ Singleton {
     function raidColor(raid, difficulty) {
         const group = raidGroup(raid);
         if (!group)
-            return Theme.yellow;
-        return group.colors[validDifficulty(raid, difficulty)] || Theme.yellow;
+            return Colors.base16.base0a;
+        return group.colors[validDifficulty(raid, difficulty)] || Colors.base16.base0a;
     }
     function normalizeTime(value) {
         const number = Number(value);
@@ -467,7 +467,7 @@ Singleton {
                 cleared++;
                 return `<b style="color:${raidColor(group.raid, session.difficulty)}">✓</b>`;
             }
-            return `<b style="color:${Theme.overlay1}">○</b>`;
+            return `<b style="color:${Colors.md3.outline}">○</b>`;
         });
         return {
             text: cleared ? marks.join("") : "",

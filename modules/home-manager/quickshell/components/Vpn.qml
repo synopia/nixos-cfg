@@ -31,12 +31,12 @@ BarPill {
             width: 7
             height: 7
             radius: 4
-            color: root.busy ? Theme.yellow : root.connected ? Theme.green : Theme.overlay0
+            color: root.busy ? Colors.base16.base0a : root.connected ? Colors.base16.base0b : Colors.md3.outline_variant
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: root.connected ? Theme.text : Theme.subtext0
+            color: root.connected ? Colors.md3.on_surface : Colors.md3.on_surface_variant
             font.pixelSize: 10
             font.weight: Font.DemiBold
             text: root.busy ? "VPN…" : "VPN"

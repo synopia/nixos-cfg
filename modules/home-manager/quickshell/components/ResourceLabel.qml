@@ -4,7 +4,7 @@ import qs.theme
 Row {
     required property string label
     required property string value
-    property color accent: Theme.accent
+    property color accent: Colors.md3.primary
     property int valueWidth: 0
 
     spacing: 3
@@ -20,7 +20,7 @@ Row {
     Text {
         anchors.verticalCenter: parent.verticalCenter
         width: parent.valueWidth > 0 ? parent.valueWidth : implicitWidth
-        color: Theme.text
+        color: Colors.md3.on_surface
         font.pixelSize: 10
         horizontalAlignment: Text.AlignRight
         text: parent.value

@@ -135,9 +135,9 @@ BarPill {
                 height: 22
                 radius: 10
                 color: active
-                    ? Theme.accent
+                    ? Colors.md3.primary
                     : occupied
-                        ? Theme.surface2
+                        ? Colors.md3.surface_container_highest
                         : "transparent"
 
                 IconImage {
@@ -151,7 +151,7 @@ BarPill {
                     anchors.centerIn: parent
                     visible: workspaceButton.biggestClient === null
                     text: workspaceButton.workspace
-                    color: workspaceButton.active ? Theme.crust : Theme.subtext0
+                    color: workspaceButton.active ? Colors.md3.background : Colors.md3.on_surface_variant
                     font.pixelSize: 10
                     font.weight: workspaceButton.active ? Font.Bold : Font.Normal
                 }

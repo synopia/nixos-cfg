@@ -71,7 +71,7 @@ BarPill {
             34: "#8db7e0",
             35: "#f271fb",
             36: "#6bf7ff",
-            37: Theme.text,
+            37: Colors.md3.on_surface,
             90: "#838887",
             91: "#ff3333",
             92: "#00ff00",
@@ -79,7 +79,7 @@ BarPill {
             94: "#6871ff",
             95: "#ff76ff",
             96: "#60fcff",
-            97: Theme.text
+            97: Colors.md3.on_surface
         };
 
         return colors[code] ?? null;
@@ -94,7 +94,7 @@ BarPill {
             44: "#8db7e0",
             45: "#f271fb",
             46: "#6bf7ff",
-            47: Theme.text,
+            47: Colors.md3.on_surface,
             100: "#838887",
             101: "#ff3333",
             102: "#00ff00",
@@ -102,7 +102,7 @@ BarPill {
             104: "#6871ff",
             105: "#ff76ff",
             106: "#60fcff",
-            107: Theme.text
+            107: Colors.md3.on_surface
         };
 
         return colors[code] ?? null;
@@ -111,7 +111,7 @@ BarPill {
     function ansiToHtml(value) {
         let result = "";
         let lastIndex = 0;
-        let foreground = Theme.text;
+        let foreground = Colors.md3.on_surface;
         let background = "";
         let faint = false;
         let italic = false;
@@ -145,7 +145,7 @@ BarPill {
         }
 
         function reset() {
-            foreground = Theme.text;
+            foreground = Colors.md3.on_surface;
             background = "";
             faint = false;
             italic = false;
@@ -186,7 +186,7 @@ BarPill {
                 } else if (code === 29) {
                     strike = false;
                 } else if (code === 39) {
-                    foreground = Theme.text;
+                    foreground = Colors.md3.on_surface;
                 } else if (code === 49) {
                     background = "";
                 } else if (nextForeground) {
@@ -242,14 +242,14 @@ BarPill {
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.yellow
+            color: Colors.base16.base0a
             font.pixelSize: 13
             text: root.weatherIcon(root.weatherCode)
         }
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.text
+            color: Colors.md3.on_surface
             font.pixelSize: 11
             text: root.temperature
         }
@@ -283,8 +283,8 @@ BarPill {
         Rectangle {
             id: forecastFrame
 
-            color: Theme.crust
-            border.color: Theme.surface1
+            color: Colors.md3.background
+            border.color: Colors.md3.surface_container_high
             border.width: 1
             radius: 8
             implicitWidth: forecastText.implicitWidth + 24
@@ -294,7 +294,7 @@ BarPill {
                 id: forecastText
 
                 anchors.centerIn: parent
-                color: Theme.text
+                color: Colors.md3.on_surface
                 font.family: "monospace"
                 font.pixelSize: 10
                 lineHeight: 0.92

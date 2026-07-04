@@ -95,8 +95,8 @@ Scope {
                 bottomMargin: 6
             }
             radius: 12
-            color: Theme.crust
-            border.color: Theme.surface1
+            color: Colors.md3.background
+            border.color: Colors.md3.surface_container_high
             border.width: 1
 
             ColumnLayout {
@@ -111,7 +111,7 @@ Scope {
 
                     Text {
                         Layout.fillWidth: true
-                        color: Theme.text
+                        color: Colors.md3.on_surface
                         font.pixelSize: 14
                         font.weight: Font.Bold
                         text: "Notifications"
@@ -119,15 +119,15 @@ Scope {
 
                     Text {
                         color: NotificationService.doNotDisturb
-                            ? Theme.red
-                            : Theme.subtext0
+                            ? Colors.md3.error
+                            : Colors.md3.on_surface_variant
                         font.pixelSize: 10
                         font.weight: Font.DemiBold
                         text: NotificationService.doNotDisturb ? "DND" : ""
                     }
 
                     Text {
-                        color: Theme.subtext0
+                        color: Colors.md3.on_surface_variant
                         font.pixelSize: 18
                         text: "×"
 
@@ -144,7 +144,7 @@ Scope {
                     visible: NotificationService.history.length === 0
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 24
-                    color: Theme.overlay1
+                    color: Colors.md3.outline
                     font.pixelSize: 11
                     text: "No notifications"
                 }

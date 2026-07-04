@@ -1,6 +1,7 @@
 pragma Singleton
 import Quickshell
 import QtQuick
+import qs.theme
 
 Singleton {
     readonly property string flavor: "mocha"
@@ -8,7 +9,7 @@ Singleton {
 
     readonly property color base: "#1e1e2e"
     readonly property color blue: "#89b4fa"
-    readonly property color crust: "#11111b"
+    readonly property color crust: Colors.md3.background
     readonly property color flamingo: "#f2cdcd"
     readonly property color green: "#a6e3a1"
     readonly property color lavender: "#b4befe"

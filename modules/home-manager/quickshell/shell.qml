@@ -29,7 +29,7 @@ Scope {
             }
 
             implicitHeight: 36
-            color: Theme.crust
+            color: Colors.md3.background
 
             RowLayout {
                 anchors {

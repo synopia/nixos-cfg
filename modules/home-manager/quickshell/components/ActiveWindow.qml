@@ -77,7 +77,7 @@ BarPill {
 
         Text {
             Layout.fillWidth: true
-            color: Theme.accent
+            color: Colors.md3.primary
             font.pixelSize: 10
             horizontalAlignment: Text.AlignLeft
             text: root.appName
@@ -86,7 +86,7 @@ BarPill {
 
         Text {
             Layout.fillWidth: true
-            color: Theme.text
+            color: Colors.md3.on_surface
             font.weight: Font.Bold
             font.pixelSize: 11
             horizontalAlignment: Text.AlignLeft

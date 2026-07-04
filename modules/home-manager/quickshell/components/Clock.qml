@@ -8,7 +8,7 @@ BarPill {
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.text
+            color: Colors.md3.on_surface
             font.pixelSize: 12
             font.weight: Font.DemiBold
             text: Qt.formatDateTime(clock.date, "HH:mm")
@@ -16,7 +16,7 @@ BarPill {
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            color: Theme.subtext0
+            color: Colors.md3.on_surface_variant
             font.pixelSize: 11
             text: Qt.formatDateTime(clock.date, "ddd, dd MMM")
         }

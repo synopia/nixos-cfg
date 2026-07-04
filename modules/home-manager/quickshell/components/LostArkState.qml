@@ -95,7 +95,7 @@ BarPill {
     }
 
     content: Row {
-        property color accent: Theme.mauve
+        property color accent: Colors.md3.primary
 
         Text {
             color: parent.accent
@@ -165,8 +165,8 @@ BarPill {
                     topMargin: 8
                     horizontalCenter: parent.horizontalCenter
                 }
-                color: Theme.crust
-                border.color: Theme.surface1
+                color: Colors.md3.background
+                border.color: Colors.md3.surface_container_high
                 border.width: 1
                 radius: 8
                 implicitWidth: overviewGrid.implicitWidth + 24
@@ -193,15 +193,15 @@ BarPill {
 
                             Layout.preferredWidth: index % loaOverview.cols === 0 ? 96 : 62
                             Layout.preferredHeight: 26
-                            color: index < loaOverview.cols || (index % loaOverview.cols === 0) ? Theme.surface0 : canPlan && modelData.planned ? Theme.surface1 : cellMouse.containsMouse && canPlan ? Theme.surface0 : Theme.mantle
-                            border.color: canPlan && modelData.planned ? modelData.planned.color : Theme.mantle
+                            color: index < loaOverview.cols || (index % loaOverview.cols === 0) ? Colors.md3.surface_container : canPlan && modelData.planned ? Colors.md3.surface_container_high : cellMouse.containsMouse && canPlan ? Colors.md3.surface_container : Colors.md3.surface_container_lowest
+                            border.color: canPlan && modelData.planned ? modelData.planned.color : Colors.md3.surface_container_lowest
                             border.width: canPlan && modelData.planned ? 1 : 0
                             opacity: modelData.inactive && index >= loaOverview.cols ? 0.45 : 1
 
                             Text {
                                 anchors.centerIn: parent
                                 width: parent.width - 8
-                                color: parent.canPlan && modelData.text === "" ? Theme.overlay1 : Theme.text
+                                color: parent.canPlan && modelData.text === "" ? Colors.md3.outline : Colors.md3.on_surface
                                 font.family: "monospace"
                                 font.pixelSize: 10
                                 font.bold: parent.isHeader
@@ -240,7 +240,7 @@ BarPill {
 
         visible: root.detailWindowOpen
         title: "LOA State"
-        color: Theme.crust
+        color: Colors.md3.background
         minimumWidth: 940
         minimumHeight: 360
         width: Math.max(minimumWidth, Math.max(detailGrid.implicitWidth, controls.implicitWidth, dpsModeControls.implicitWidth) + 32)
@@ -253,7 +253,7 @@ BarPill {
 
         Rectangle {
             anchors.fill: parent
-            color: Theme.crust
+            color: Colors.md3.background
 
             ColumnLayout {
                 id: detailContent
@@ -282,7 +282,7 @@ BarPill {
 
                     Text {
                         Layout.fillWidth: true
-                        color: Theme.text
+                        color: Colors.md3.on_surface
                         font.pixelSize: 11
                         font.weight: Font.DemiBold
                         horizontalAlignment: Text.AlignHCenter
@@ -341,15 +341,15 @@ BarPill {
                             Layout.columnSpan: columnSpan
                             Layout.preferredWidth: 90 * columnSpan + (columnSpan - 1)
                             Layout.preferredHeight: 28
-                            color: modelData.type === "header" || modelData.type === "character" ? Theme.surface0 : canPlan && modelData.planned ? Theme.surface1 : cellMouse.containsMouse && canPlan ? Theme.surface0 : Theme.mantle
-                            border.color: canPlan && modelData.planned ? modelData.planned.color : Theme.mantle
+                            color: modelData.type === "header" || modelData.type === "character" ? Colors.md3.surface_container : canPlan && modelData.planned ? Colors.md3.surface_container_high : cellMouse.containsMouse && canPlan ? Colors.md3.surface_container : Colors.md3.surface_container_lowest
+                            border.color: canPlan && modelData.planned ? modelData.planned.color : Colors.md3.surface_container_lowest
                             border.width: canPlan && modelData.planned ? 1 : 0
                             opacity: modelData.inactive && modelData.type !== "header" ? 0.45 : 1
 
                             Text {
                                 anchors.centerIn: parent
                                 width: parent.width - 8
-                                color: parent.canPlan && modelData.text === "" ? Theme.overlay1 : Theme.text
+                                color: parent.canPlan && modelData.text === "" ? Colors.md3.outline : Colors.md3.on_surface
                                 font.family: "monospace"
                                 font.pixelSize: 10
                                 font.bold: parent.isHeader
@@ -419,8 +419,8 @@ BarPill {
             implicitWidth: 520
             implicitHeight: reservationContent.implicitHeight + 18
             radius: 6
-            color: Theme.base
-            border.color: Theme.surface2
+            color: Colors.md3.surface
+            border.color: Colors.md3.surface_container_highest
             border.width: 1
 
             ColumnLayout {
@@ -432,7 +432,7 @@ BarPill {
 
                 Text {
                     Layout.fillWidth: true
-                    color: Theme.text
+                    color: Colors.md3.on_surface
                     font.pixelSize: 11
                     font.weight: Font.DemiBold
                     elide: Text.ElideRight
@@ -569,14 +569,14 @@ BarPill {
         Layout.preferredWidth: 26
         Layout.preferredHeight: 24
         radius: 6
-        color: buttonMouse.containsMouse && enabled ? Theme.surface2 : Theme.surface0
-        border.color: enabled ? Theme.surface2 : Theme.surface1
+        color: buttonMouse.containsMouse && enabled ? Colors.md3.surface_container_highest : Colors.md3.surface_container
+        border.color: enabled ? Colors.md3.surface_container_highest : Colors.md3.surface_container_high
         border.width: 1
         opacity: enabled ? 1 : 0.45
 
         Text {
             anchors.centerIn: parent
-            color: Theme.text
+            color: Colors.md3.on_surface
             font.pixelSize: 16
             font.weight: Font.Bold
             text: button.label
@@ -602,13 +602,13 @@ BarPill {
         Layout.preferredWidth: 42
         Layout.preferredHeight: 22
         radius: 5
-        color: selected ? Theme.mauve : modeMouse.containsMouse ? Theme.surface2 : Theme.surface0
-        border.color: selected ? Theme.mauve : Theme.surface1
+        color: selected ? Colors.md3.primary : modeMouse.containsMouse ? Colors.md3.surface_container_highest : Colors.md3.surface_container
+        border.color: selected ? Colors.md3.primary : Colors.md3.surface_container_high
         border.width: 1
 
         Text {
             anchors.centerIn: parent
-            color: button.selected ? Theme.crust : Theme.text
+            color: button.selected ? Colors.md3.background : Colors.md3.on_surface
             font.pixelSize: 9
             font.weight: Font.Bold
             text: button.label
@@ -635,14 +635,14 @@ BarPill {
         Layout.preferredWidth: 72
         Layout.preferredHeight: 24
         radius: 5
-        color: primary ? Theme.mauve : danger ? Theme.red : buttonMouse.containsMouse && enabled ? Theme.surface2 : Theme.surface0
-        border.color: primary ? Theme.mauve : danger ? Theme.red : Theme.surface1
+        color: primary ? Colors.md3.primary : danger ? Colors.md3.error : buttonMouse.containsMouse && enabled ? Colors.md3.surface_container_highest : Colors.md3.surface_container
+        border.color: primary ? Colors.md3.primary : danger ? Colors.md3.error : Colors.md3.surface_container_high
         border.width: 1
         opacity: enabled ? 1 : 0.45
 
         Text {
             anchors.centerIn: parent
-            color: button.primary || button.danger ? Theme.crust : Theme.text
+            color: button.primary || button.danger ? Colors.md3.background : Colors.md3.on_surface
             font.pixelSize: 9
             font.weight: Font.Bold
             text: button.label

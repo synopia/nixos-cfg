@@ -79,20 +79,20 @@ BarPill {
         ResourceLabel {
             label: "MEM"
             value: root.percentage(root.memoryUsage)
-            accent: Theme.mauve
+            accent: Colors.md3.primary
         }
 
         ResourceLabel {
             label: "CPU"
             value: root.percentage(root.cpuUsage)
-            accent: Theme.blue
+            accent: Colors.base16.base0d
         }
 
         ResourceLabel {
             label: "NET"
             value: root.rate(root.networkRate)
             valueWidth: 34
-            accent: Theme.green
+            accent: Colors.base16.base0b
         }
     }
 
