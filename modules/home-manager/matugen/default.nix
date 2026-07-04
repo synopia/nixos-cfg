@@ -29,6 +29,10 @@ in
     input_path = "/home/synopia/nixos-config/modules/home-manager/matugen/templates/kitty-colors.conf"
     output_path = "~/.config/kitty/themes/matugen.conf"
     post_hook = "kitty +kitten themes --dump-theme=yes --reload-in=all matugen &> /dev/null"
+
+    [templates.rofi]
+    input_path = '/home/synopia/nixos-config/modules/home-manager/matugen/templates/rofi-colors.rasi'
+    output_path = '~/.config/rofi/colors.rasi'
   '';
   programs.matugen = {
     enable = true;
