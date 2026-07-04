@@ -83,11 +83,6 @@
         background-color: @surface;
     }
 
-    horibox {
-        orientation: horizontal;
-        children: [ prompt, entry, listview ];
-    }
-
     listview {
         layout: horizontal;
         spacing: 5px;
