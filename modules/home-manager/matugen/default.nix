@@ -24,6 +24,11 @@ in
     [templates.quickshell]
     input_path = '/home/synopia/nixos-config/modules/home-manager/matugen/templates/quickshell.json'
     output_path = '~/.local/state/quickshell/generated/colors.json'
+
+    [templates.kitty]
+    input_path = "/home/synopia/nixos-config/modules/home-manager/matugen/templates/kitty.conf"
+    output_path = "~/.config/kitty/themes/matugen.conf"
+    post_hook = "kitty +kitten themes --dump-theme=yes --reload-in=all matugen &> /dev/null"
   '';
   programs.matugen.enable = true;
 }
