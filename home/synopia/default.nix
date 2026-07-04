@@ -50,15 +50,16 @@
     };
   };
 
-  # programs.rofi = {
-  #   enable = true;
-  #   modes = [ "drun" ];
-  #   extraConfig = {
-  #     show-icons = true;
-  #     icon-theme = "Papirus-Dark";
-  #     drun-display-format = "{name}";
-  #   };
-  # };
+  programs.rofi = {
+    enable = true;
+    modes = [ "drun" ];
+    theme = home.homeDirectory.".config/rofi/colors.rasi";
+    extraConfig = {
+      show-icons = true;
+      icon-theme = "Papirus-Dark";
+      drun-display-format = "{name}";
+    };
+  };
   home.packages = with pkgs; [
     htop
     btop
