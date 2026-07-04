@@ -10,7 +10,7 @@
     };
 
     modules = [
-      inputs.stylix.nixosModules.stylix
+      # inputs.stylix.nixosModules.stylix
 
       ./configuration.nix
     ];
