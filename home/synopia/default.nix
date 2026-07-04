@@ -93,12 +93,12 @@
           spacing = mkLiteral "5px";
           lines = mkLiteral "10";
         };
-        entry = {
+        "entry" = {
           expand = false;
           cursor = mkLiteral "pointer";
           width = mkLiteral "10em";
         };
-        element = {
+        "element" = {
           orientation = mkLiteral "horizontal";
           spacing = mkLiteral "5px";
           children = map mkLiteral [
@@ -108,7 +108,7 @@
         };
 
         "element-icon" = {
-          size = "2.5em";
+          size = "25em";
         };
 
         "element selected" = {
