@@ -10,7 +10,7 @@ Singleton {
 
     readonly property var laStart: new Date("2024-01-03T09:00:00")
     property int detailColumns: 3
-    property var overviewHeaders: ["Name", "Lvl", "CP"]
+    property var overviewHeaders: ["Name"]
     property var raidGroupsData: []
     readonly property var hourOptions: [
         {
@@ -454,7 +454,8 @@ Singleton {
             raid: raid || "",
             editable: !!editable,
             planned: planned || null,
-            inactive: !!inactive,
+            inactive: false//!!inactive,
+            ,
             span: span || 1
         };
     }
@@ -469,7 +470,7 @@ Singleton {
             return `<b style="color:${Theme.overlay1}">○</b>`;
         });
         return {
-            text: marks.join(""),
+            text: cleared ? marks.join("") : "",
             cleared: cleared
         };
     }
@@ -490,8 +491,8 @@ Singleton {
     }
     function rebuildTables() {
         raidGroupsData = buildRaidGroups(rawData);
-        detailColumns = 3 + raidGroupsData.reduce((total, group) => total + group.gates.length, 0);
-        overviewHeaders = ["Name", "Lvl", "CP"].concat(raidGroupsData.map(group => group.shortLabel));
+        detailColumns = 1 + raidGroupsData.reduce((total, group) => total + group.gates.length, 0);
+        overviewHeaders = ["Name"].concat(raidGroupsData.map(group => group.shortLabel));
         data = buildTable(rawData);
         overviewData = buildOverviewTable(rawData);
     }
@@ -539,7 +540,7 @@ Singleton {
         const raids = raidGroupsData;
         const buffColors = ["#ee9090", "#90ee90", "#eeee90", "#9090ee"];
         const summaries = characterRaidSummaries(data);
-        const result = [makeCell("Name", "header"), makeCell("Lvl", "header"), makeCell("CP", "header")];
+        const result = [makeCell("Name", "header")];//, makeCell("Lvl", "header"), makeCell("CP", "header")];
         for (const group of raids)
             result.push(makeCell(group.label, "header", "", "", false, null, false, group.gates.length));
         let lastPlayer = "";
@@ -554,9 +555,9 @@ Singleton {
             }
 
             const inactive = raids.length > 0 && completedRaidCount(summaries, run.name) >= raids.length;
-            result.push(makeCell(run.name, "character", "", "", false, null, inactive));
-            result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
-            result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
+            result.push(makeCell(`${run.name}<br>${Math.round(run.itemLevel)} / ${Math.round(run.combatPower)}`, "character", "", "", false, null, inactive));
+            // result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
+            // result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
 
             for (const group of raids) {
                 const reservation = reservations[reservationKey(run.name, group.raid)];
@@ -578,16 +579,18 @@ Singleton {
                                 dpsCon,
                                 supCon,
                                 ndps,
-                                dps
+                                dps,
+                                dead
                             } = session.performance;
-                            cell.text = `<b style="color:${color}">${abbreviateNumber(customRound(ndps))}/${abbreviateNumber(customRound(dps))}</b><br>+${customRound(100 * supCon, 0)}%+${customRound(100 * dpsCon, 0)}%`;
+                            cell.text = `${dead ? "💀" : ""}<b style="color:${color}">${abbreviateNumber(customRound(ndps))}/${abbreviateNumber(customRound(dps))}</b><br>+${customRound(100 * supCon, 0)}%+${customRound(100 * dpsCon, 0)}%`;
                         } else {
                             const {
                                 rdps,
                                 rcon,
-                                uptimes
+                                uptimes,
+                                dead
                             } = session.performance;
-                            cell.text = `${uptimes.map((u, i) => `<b style="color:${buffColors[i]}">${customRound(u * 100, 0)}</b>`).join(".")}<br>+${customRound(100 * rcon, 0)}%`;
+                            cell.text = `${dead ? "💀" : ""}<b style="color:${color}">+${customRound(100 * rcon, 0)}%</b><br>${uptimes.map((u, i) => `<b style="color:${buffColors[i]}">${customRound(u * 100, 0)}</b>`).join("·")}`;
                         }
                     }
                     result.push(cell);
@@ -614,9 +617,9 @@ Singleton {
             }
 
             const inactive = raids.length > 0 && completedRaidCount(summaries, run.name) >= raids.length;
-            result.push(makeCell(run.name, "character", "", "", false, null, inactive));
-            result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
-            result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
+            result.push(makeCell(`${run.name}<br>${Math.round(run.itemLevel)} / ${Math.round(run.combatPower)}`, "character", "", "", false, null, inactive));
+            // result.push(makeCell(Math.round(run.itemLevel).toString(), "stat", "", "", false, null, inactive));
+            // result.push(makeCell(Math.round(run.combatPower).toString(), "stat", "", "", false, null, inactive));
 
             for (const group of raids) {
                 const marks = overviewRaidMarks(group, characterRaids);

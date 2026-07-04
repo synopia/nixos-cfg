@@ -9,10 +9,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:nix-community/stylix";
+    matugen = {
+      url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # stylix = {
+    #   url = "github:nix-community/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.55.4";
