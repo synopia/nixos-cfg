@@ -50,9 +50,6 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    rofi
-  ];
   # programs.rofi = {
   #   enable = true;
   #   modes = [ "drun" ];
