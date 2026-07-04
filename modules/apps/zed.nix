@@ -17,8 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs;[zed];
-    programs.zed-editor = {
+    syncon.home.programs.programs.zed-editor = {
       enable = true;
       extensions = [
         "nix"
