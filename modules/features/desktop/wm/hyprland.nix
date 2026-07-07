@@ -34,25 +34,6 @@ mkFeature args {
 
     security.polkit.enable = true;
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-      ];
-      config.hyprland = {
-        default = [
-          "hyprland"
-          "gtk"
-          "kde"
-        ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];
-      };
-    };
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       USE_WAYLAND = "1";
@@ -73,6 +54,22 @@ mkFeature args {
   };
 
   home = { cfg, ... }: {
+    xdg.portal = {
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+      config.hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];
+      };
+    };
+
     xdg.configFile."hypr/config" = {
       source = lib.cleanSource ./hyprland;
       recursive = true;

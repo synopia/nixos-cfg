@@ -33,6 +33,32 @@ mkFeature args {
         gnome-online-accounts.enable = true;
       };
     };
+    systemd.user.services.network-manager-applet = {
+      description = "NetworkManager secret agent";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+    };
+
+    # systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    #   description = "polkit-gnome-authentication-agent-1";
+    #   wantedBy = [ "graphical-session.target" ];
+    #   wants = [ "graphical-session.target" ];
+    #   after = [ "graphical-session.target" ];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
   };
   home = { cfg, ... }: {
     home.packages = with pkgs; [
@@ -58,34 +84,5 @@ mkFeature args {
         fi
       done
     '';
-
-  };
-  nixos = {
-    systemd.user.services.network-manager-applet = {
-      description = "NetworkManager secret agent";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
-        Restart = "on-failure";
-        RestartSec = 1;
-      };
-    };
-
-    systemd.user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
   };
 }
