@@ -14,7 +14,7 @@ with lib.matrix;
     defaultShell = "fish";
 
     shells = {
-      bash = enabled;
+      bash = disabled;
       zsh = disabled;
       #fish=enabled;
     };

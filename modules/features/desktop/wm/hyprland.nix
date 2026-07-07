@@ -57,13 +57,14 @@ mkFeature args {
     xdg.portal = {
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
+        kdePackages.xdg-desktop-portal-kde
       ];
       config.hyprland = {
         default = [
           "hyprland"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
         "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
         "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];

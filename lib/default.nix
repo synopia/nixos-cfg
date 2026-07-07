@@ -35,9 +35,7 @@ rec {
   validFiles =
     dir:
     map (file: dir + "/${file}") (
-      filter (file: hasSuffix ".nix" file && file != "default.nix" && !lib.hasSuffix "-hm.nix" file) (
-        files dir
-      )
+      filter (file: hasSuffix ".nix" file && file != "default.nix") (files dir)
     );
 
 }

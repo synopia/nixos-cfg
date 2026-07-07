@@ -62,3 +62,7 @@ hl.window_rule({
     match = { class = "obsidian" },
     workspace = "3",
 })
+hl.window_rule({
+    match = { class = "steam_app_1599340" },
+    workspace = "7",
+})
