@@ -2,6 +2,7 @@ args@{
   lib,
   pkgs,
   nixpkgs,
+  inputs,
   config,
   ...
 }:

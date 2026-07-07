@@ -13,12 +13,12 @@ mkFeature args {
   };
 
   nixos = {
-    networking.networkmanager ={
+    networking.networkmanager = {
       enable = true;
       plugins = [
         pkgs.networkmanager-openvpn
       ];
-    }
+    };
     security.polkit.enable = true;
     services = {
       # blueman.enable=true;
@@ -59,6 +59,8 @@ mkFeature args {
       done
     '';
 
+  };
+  nixos = {
     systemd.user.services.network-manager-applet = {
       description = "NetworkManager secret agent";
       wantedBy = [ "graphical-session.target" ];
@@ -85,8 +87,5 @@ mkFeature args {
         TimeoutStopSec = 10;
       };
     };
-  };
-  nixos = {
-
   };
 }
