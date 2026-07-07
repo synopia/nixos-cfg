@@ -7,13 +7,13 @@ args@{
 with lib;
 with lib.matrix;
 mkFeature args {
-  name = "apps.social.whatsapp";
+  name = "apps.obsidian";
 
   options = {
   };
   home = { cfg, ... }: {
     home.packages = with pkgs; [
-      karere
+      obsidian
     ];
   };
 }

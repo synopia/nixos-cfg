@@ -7,13 +7,12 @@ args@{
 with lib;
 with lib.matrix;
 mkFeature args {
-  name = "apps.social.whatsapp";
+  name = "system.printing";
 
   options = {
   };
-  home = { cfg, ... }: {
-    home.packages = with pkgs; [
-      karere
-    ];
+
+  nixos = { cfg, ... }: {
+    services.printing.enable = true;
   };
 }

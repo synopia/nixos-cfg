@@ -35,4 +35,11 @@ mkFeature args {
       #media-session.enable = true;
     };
   };
+
+  home = {
+    xdg.dataFile."wireplumber/scripts/90-steam-recording.lua".source =
+      ./wireplumber/90-steam-recording.lua;
+    xdg.configFile."wireplumber/wireplumber.conf.d/90-steam-recording.conf".source =
+      ./wireplumber/90-steam-recording.conf;
+  }
 }

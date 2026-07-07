@@ -1,11 +1,6 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
-with lib;
-with lib.matrix;
 {
   imports = [
     ./hardware-configuration.nix
@@ -18,6 +13,11 @@ with lib.matrix;
   system.stateVersion = "26.05";
   networking.hostName = "matrix-vm";
 
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+    useOSProber = true;
+  };
   # environment.systemPackages = with pkgs; [
   #   gh
   #   pwvucontrol

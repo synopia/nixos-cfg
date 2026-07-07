@@ -13,10 +13,31 @@ mkFeature args {
   };
 
   nixos = {
-    networking.networkmanager = enabled;
+    networking.networkmanager ={
+      enable = true;
+      plugins = [
+        pkgs.networkmanager-openvpn
+      ];
+    }
+    security.polkit.enable = true;
+    services = {
+      # blueman.enable=true;
+      # gvfs.enable=true;
+      udisks2.enable = true;
+      upower.enable = true;
+      accounts-daemon.enable = true;
+
+      gnome = {
+        glib-networking.enable = true;
+        gnome-keyring.enable = true;
+        gnome-online-accounts.enable = true;
+      };
+    };
   };
   home = { cfg, ... }: {
     home.packages = with pkgs; [
+      coreutils
+      polkit_gnome
       networkmanagerapplet
     ];
 
@@ -37,6 +58,33 @@ mkFeature args {
         fi
       done
     '';
+
+    systemd.user.services.network-manager-applet = {
+      description = "NetworkManager secret agent";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
+        Restart = "on-failure";
+        RestartSec = 1;
+      };
+    };
+
+    systemd.user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
   };
   nixos = {
 

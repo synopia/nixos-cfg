@@ -9,7 +9,7 @@ with lib.matrix;
 mkFeature args {
   name = "apps.browsers.google-chrome";
 
-  nixos = mkIf cfg.enable {
+  nixos = {
     environment.systemPackages = with pkgs; [ google-chrome ];
   };
 }

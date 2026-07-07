@@ -30,14 +30,17 @@ with lib.matrix;
   };
 
   matrix.dev = {
-    tools = disabled;
+    tools = enabled;
+    vmhost = enabled;
+    docker = enabled;
   };
   matrix.system = {
     net = enabled;
     nix = enabled;
     audio = enabled;
     flatpak = enabled;
-    # gaming = enabled;
+    gaming = enabled;
+    printing = enabled;
   };
 
   matrix.desktop = {
@@ -61,6 +64,8 @@ with lib.matrix;
   };
 
   matrix.apps = {
+    obsidian = enabled;
+
     loa-logs = {
       enable = true;
       version = "1.47.0";
@@ -68,12 +73,13 @@ with lib.matrix;
       appImageHash = "sha256-kZ5gUee3oCLeHDtKza22MciEjuvjEj0Sq3p5m8Oxc3c=";
     };
     social = {
-      # discord = enabled;
-      # whatsapp = enabled;
+      discord = enabled;
+      whatsapp = enabled;
     };
     zed = enabled;
     browsers = {
       firefox = enabled;
+      google-chrome = enabled;
     };
   };
 }

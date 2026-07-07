@@ -49,7 +49,8 @@
     in
     {
       nixosConfigurations = {
-        matrix-vm = addHost "matrix-vm";
+        # matrix-vm = addHost "matrix-vm";
+        matrix = addHost "matrix";
       };
       devShells.x86_64-linux.default =
         let
