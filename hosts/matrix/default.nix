@@ -5,53 +5,66 @@
   ...
 }:
 with lib;
-with lib.syncon;
+with lib.matrix;
 {
-  imports = [ ./hardware-configuration.nix ];
-
-  environment.systemPackages = with pkgs; [
-    gh
-    pwvucontrol
-    mpv
-    ffmpeg
+  imports = [
+    ./hardware-configuration.nix
+    ../../users/synopia.nix
   ];
 
-  syncon.system.hosts.matrix = {
-    variant = "dark";
-    type = "scheme-neutral";
-    wallpaper =
-      let
-        image = import ./wallpaper.nix;
-      in
-      syncon.fetchImage image.url image.sha256;
-  };
+  networking.hostName = "matrix-vm";
 
-  syncon.system.locale.timeZone = "Europe/Berlin";
-  syncon.system.defaultShell = pkgs.fish;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nixpkgs.config.allowUnfree = true;
+  system.stateVersion = "26.05";
 
-  syncon.cli.git = {
-    email = "paul.fritsche@gmail.com";
-    name = "Paul Fritsche";
-  };
+  # environment.systemPackages = with pkgs; [
+  #   gh
+  #   pwvucontrol
+  #   mpv
+  #   ffmpeg
+  # ];
 
-  syncon.desktop = {
-    hyprland = enabled;
-  };
-  syncon.apps = {
-    zed = enabled;
-  };
+  # syncon.system.hosts.matrix = {
+  #   variant = "dark";
+  #   type = "scheme-neutral";
+  #   wallpaper =
+  #     let
+  #       image = import ./wallpaper.nix;
+  #     in
+  #     syncon.fetchImage image.url image.sha256;
+  # };
 
-  syncon.browsers = {
-    brave = disabled;
-    chromium = disabled;
-    google-chrome = enabled;
-    firefox = {
-      enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        #
-      ];
-    };
-  };
+  # syncon.system.locale.timeZone = "Europe/Berlin";
+  # syncon.system.defaultShell = pkgs.fish;
+
+  # syncon.cli.git = {
+  #   email = "paul.fritsche@gmail.com";
+  #   name = "Paul Fritsche";
+  # };
+
+  # syncon.desktop = {
+  #   hyprland = enabled;
+  # };
+  # syncon.apps = {
+  #   zed = enabled;
+  # };
+  # syncon.cli.starship = enabled;
+
+  # syncon.browsers = {
+  #   brave = disabled;
+  #   chromium = disabled;
+  #   google-chrome = enabled;
+  #   firefox = {
+  #     enable = true;
+  #     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+  #       #
+  #     ];
+  #   };
+  # };
   # flake.nixosConfigurations.matrix = inputs.nixpkgs.lib.nixosSystem {
   #   system = "x86_64-linux";
 

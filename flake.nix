@@ -2,12 +2,12 @@
   description = "NixOS Config";
 
   outputs =
-    { nixpkgs, ... }@inputs:
+    { nixpkgs, stylix, ... }@inputs:
     let
       default = {
         stateVersion = "26.05";
 
-        flakePath = "/home/${default.username}/nixos-config";
+        flakePath = "/home/${default.username}/nixos-cfg";
         templateFolder = "${default.flakePath}/dots/templates";
         configFolder = "${default.flakePath}/dots/config";
         localFolder = "${default.flakePath}/dots/local";
@@ -16,84 +16,65 @@
 
         system = "x86_64-linux";
         username = "synopia";
-
-        wallpaper =
-          let
-            url = "https://wallpapercave.com/download/future-wallpaper-wp2975125";
-            sha256 = "0cb612220733b7f4cf8cb96039e6726f68f057d097ad1cd36ee8a71982a4fadc";
-            ext = nixpkgs.lib.last (nixpkgs.lib.splitString "." url);
-          in
-          builtins.fetchurl {
-            name = "wallpaper-${sha256}.${ext}";
-            inherit url sha256;
-          };
       };
 
       mkLib =
         nixpkgs:
         nixpkgs.lib.extend (
-          self: super: { syncon = import ./lib { lib = self; }; } // inputs.home-manager.lib
+          self: super: { matrix = import ./lib { lib = self; }; } // inputs.home-manager.lib
         );
 
       addHost =
         hostName:
         with inputs;
+        let
+          lib = mkLib inputs.nixpkgs;
+        in
         nixpkgs.lib.nixosSystem {
           system = default.system;
           modules = [
-            ./modules
             (./. + "/hosts/${hostName}/")
             {
               nixpkgs.overlays = [
                 # nix-cachyos-kernel.overlays.pinned
                 nur.overlays.default
               ];
-
-              environment.systemPackages = [
-                matugen.packages.${default.system}.default
-              ];
             }
-            inputs.matugen.nixosModules.default
+            stylix.nixosModules.stylix
             nix-flatpak.nixosModules.nix-flatpak
+            hyprland.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs lib;
+              };
+            }
           ];
 
           specialArgs = {
-            lib = mkLib inputs.nixpkgs;
-            inherit inputs hostName default;
+            inherit inputs lib;
           };
         };
     in
     {
       nixosConfigurations = {
-        matrix = addHost "matrix";
+        matrix-vm = addHost "matrix-vm";
       };
-      devShell.x86_64-linux =
-        with import nixpkgs {
-          stdenv.hostPlatform.system = "x86_64-linux";
-        };
-        mkShell {
+      devShells.x86_64-linux.default =
+        let
+          pkgs = import nixpkgs {
+            system = default.system;
+          };
+        in
+        pkgs.mkShell {
           buildInputs = [
-            inputs.alejandra.defaultPackage.${stdenv.hostPlatform.system}
-            shellcheck
-            shfmt
-            nil
-            qt5.qttools
-            (pkgs.writeShellScriptBin "wallfetch" ''
-              if [ ! -f flake.nix ]; then echo "This script is supposed to be ran from flake root." && exit 1; fi;
-
-              path="hosts/$(hostname)/wallpaper.nix"
-              sha256=$(curl $1 | sha256sum | cut -d ' ' -f 1 )
-              if [ ! -f $path ]; then
-                  touch $path
-              fi
-
-              echo $sha256
-
-              echo "{
-                  url = \"$1\";
-                  sha256 = \"$sha256\";
-              }" > $path
-            '')
+            inputs.alejandra.defaultPackage.${default.system}
+            pkgs.shellcheck
+            pkgs.shfmt
+            pkgs.nil
+            pkgs.qt5.qttools
           ];
         };
     };
@@ -110,13 +91,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    matugen = {
-      url = "github:/InioX/Matugen";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
       url = "github:hyprwm/Hyprland"; # v0.55.4
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-flatpak = {

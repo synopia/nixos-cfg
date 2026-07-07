@@ -1,15 +1,19 @@
 { lib, ... }:
 with lib;
 rec {
+  mkFeature = import ./mkFeature.nix { inherit lib; };
   mkOpt =
     type: default: description:
     mkOption { inherit type default description; };
 
-  mkOpt' = type: default: mkOpt type default null;
+  mkOpt' = type: description: mkOption { inherit type description; };
 
   mkBoolOpt = mkOpt types.bool;
 
   mkBoolOpt' = mkOpt' types.bool;
+
+  # mkEnable = name: mkBoolOpt false "Enable/disable ${name}.";
+  # mkEnable' = name: mkBoolOpt' "Enable/disable ${name}.";
 
   enabled = {
     enable = true;
@@ -36,13 +40,4 @@ rec {
       )
     );
 
-  fetchImage =
-    url: sha256:
-    let
-      ext = lib.last (lib.splitString "." url);
-    in
-    builtins.fetchurl {
-      name = "wallpaper-${sha256}.${ext}";
-      inherit url sha256;
-    };
 }
