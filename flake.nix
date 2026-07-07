@@ -4,19 +4,7 @@
   outputs =
     { nixpkgs, stylix, ... }@inputs:
     let
-      default = {
-        stateVersion = "26.05";
-
-        flakePath = "/home/${default.username}/nixos-cfg";
-        templateFolder = "${default.flakePath}/dots/templates";
-        configFolder = "${default.flakePath}/dots/config";
-        localFolder = "${default.flakePath}/dots/local";
-        desktopEntryFolder = "${default.flakePath}/dots/desktop-entries";
-        scriptFolder = "${default.flakePath}/dots/scripts";
-
-        system = "x86_64-linux";
-        username = "synopia";
-      };
+      system = "x86_64-linux";
 
       mkLib =
         nixpkgs:
@@ -31,12 +19,13 @@
           lib = mkLib inputs.nixpkgs;
         in
         nixpkgs.lib.nixosSystem {
-          system = default.system;
+          inherit system;
+
           modules = [
             (./. + "/hosts/${hostName}/")
             {
               nixpkgs.overlays = [
-                # nix-cachyos-kernel.overlays.pinned
+                nix-cachyos-kernel.overlays.pinned
                 nur.overlays.default
               ];
             }
@@ -65,12 +54,12 @@
       devShells.x86_64-linux.default =
         let
           pkgs = import nixpkgs {
-            system = default.system;
+            inherit system;
           };
         in
         pkgs.mkShell {
           buildInputs = [
-            inputs.alejandra.defaultPackage.${default.system}
+            inputs.alejandra.defaultPackage.${system}
             pkgs.shellcheck
             pkgs.shfmt
             pkgs.nil

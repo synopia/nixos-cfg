@@ -9,6 +9,7 @@ with lib.matrix;
     defaultLocale = "en_US.UTF-8";
     extraLocale = "de_DE.UTF-8";
   };
+
   matrix.cli = {
     defaultShell = "fish";
 
@@ -28,7 +29,11 @@ with lib.matrix;
     };
   };
 
+  matrix.dev = {
+    tools = disabled;
+  };
   matrix.system = {
+    net = enabled;
     nix = enabled;
     audio = enabled;
     flatpak = enabled;
@@ -47,6 +52,7 @@ with lib.matrix;
       quickshell = enabled;
     };
     addons = {
+      hypridle = enabled;
       rofi = enabled;
       dolphin = disabled;
       nautilus = enabled;
@@ -55,6 +61,16 @@ with lib.matrix;
   };
 
   matrix.apps = {
+    loa-logs = {
+      enable = true;
+      version = "1.47.0";
+      daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
+      appImageHash = "sha256-kZ5gUee3oCLeHDtKza22MciEjuvjEj0Sq3p5m8Oxc3c=";
+    };
+    social = {
+      # discord = enabled;
+      # whatsapp = enabled;
+    };
     zed = enabled;
     browsers = {
       firefox = enabled;

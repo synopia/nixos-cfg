@@ -19,6 +19,7 @@ mkFeature args {
       alsa-utils
       easyeffects
       pwvucontrol
+      qpwgraph
     ];
     services.pipewire = {
       enable = true;

@@ -12,7 +12,22 @@ mkFeature args {
   options = {
   };
 
+  home = {
+    home.packages = with pkgs; [
+      btop
+      fd
+      jq
+      tree
+      git
+      dgop
+      ripgrep
+    ];
+  };
   nixos = {
+    services = {
+      dbus.implementation = "broker";
+      systembus-notify = enabled;
+    };
     nix = {
       extraOptions = ''
         experimental-features = nix-command flakes
@@ -47,7 +62,6 @@ mkFeature args {
       };
     };
     nixpkgs.config.allowUnfree = true;
-    system.stateVersion = "26.05";
     programs.nix-ld.enable = true;
     services.qemuGuest.enable = true;
     services.spice-vdagentd.enable = true;
