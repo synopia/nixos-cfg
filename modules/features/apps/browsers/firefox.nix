@@ -24,9 +24,9 @@ mkFeature args {
     nixpkgs.config.firefox-unwrapped.enablePlasmaBrowserIntegration = true;
   };
   home = { cfg, ... }: {
-    stylix.targets.firefox.profileNames = [
-      config.matrix.user.name
-    ];
+    # stylix.targets.firefox.profileNames = [
+    # config.matrix.user.name
+    # ];
     programs.firefox = {
       enable = true;
       package = pkgs.wrapFirefox pkgs.firefox-unwrapped {

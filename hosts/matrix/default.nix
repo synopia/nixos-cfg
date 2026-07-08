@@ -9,7 +9,7 @@
     ../../modules/core/boot.nix
     ../../modules/core/user.nix
     ../../modules/features
-    ../../users/synopia.nix
+    ../../users/synopia-niri.nix
   ];
   system.stateVersion = "26.05";
   networking.hostName = "matrix";

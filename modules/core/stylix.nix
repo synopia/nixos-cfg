@@ -2,7 +2,7 @@
 
 {
   stylix = {
-    enable = true;
+    enable = false;
     polarity = "dark";
     autoEnable = true;
     #    image = ../../wp2975125-future-wallpaper.jpg;

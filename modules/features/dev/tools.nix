@@ -21,6 +21,7 @@ mkFeature args {
 
   home = { cfg, ... }: {
     home.packages = with pkgs; [
+      neovim
 
       gzip
       inputs.codex-cli-nix.packages.${pkgs.system}.default

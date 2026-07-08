@@ -13,13 +13,13 @@ mkFeature args {
   };
 
   home = { cfg, ... }: {
-    stylix.targets.obsidian.colors.enable = true;
-    stylix.targets.obsidian.enable = true;
-    stylix.targets.obsidian.vaultNames = [
-      "main"
-      "main.main"
-      "main/main"
-    ];
+    # stylix.targets.obsidian.colors.enable = true;
+    # stylix.targets.obsidian.enable = true;
+    # stylix.targets.obsidian.vaultNames = [
+    #   "main"
+    #   "main.main"
+    #   "main/main"
+    # ];
     home.packages = with pkgs; [
       obsidian
     ];

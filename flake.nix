@@ -2,7 +2,12 @@
   description = "NixOS Config";
 
   outputs =
-    { nixpkgs, stylix, ... }@inputs:
+    {
+      nixpkgs,
+      stylix,
+      niri,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
 
@@ -87,7 +92,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland"; # v0.55.4
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -113,28 +118,11 @@
     nur = {
       url = "github:nix-community/nur";
     };
-    # nixos-manager = {
-    # url = "github:icefirex/nixos-manager";
-    # inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # nix-ld = {
-    #   url = "github:Mic92/nix-ld";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+
+    niri.url = "github:sodiboo/niri-flake";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
-  # flake-parts.lib.mkFlake { inherit inputs; } {
-  #   systems = [ "x86_64-linux" ];
-
-  #   imports = [
-  #     ./hosts/matrix
-  #   ];
-
-  #   perSystem = { pkgs, ... }: {
-  #     formatter = pkgs.nixfmt;
-  #   };
-
-  # };
-  #
-  #
 }

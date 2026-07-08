@@ -33,7 +33,7 @@ mkFeature args {
         experimental-features = nix-command flakes
       '';
       gc = {
-        # automatic = true;
+        automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
       };
@@ -63,7 +63,7 @@ mkFeature args {
     };
     nixpkgs.config.allowUnfree = true;
     programs.nix-ld.enable = true;
-    services.qemuGuest.enable = true;
+    # services.qemuGuest.enable = true;
     services.spice-vdagentd.enable = true;
     services.openssh = {
       enable = true;

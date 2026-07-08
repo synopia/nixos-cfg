@@ -16,7 +16,7 @@ with lib.matrix;
     shells = {
       bash = disabled;
       zsh = disabled;
-      #fish=enabled;
+      fish = enabled;
     };
     addons = {
       git = {
@@ -46,10 +46,10 @@ with lib.matrix;
   matrix.desktop = {
     terminal = "kitty";
 
-    wm.hyprland = enabled;
+    wm.niri = enabled;
 
     terminals.kitty = enabled;
-    shell.quickshell = enabled;
+    # shell.quickshell = enabled;
 
     addons = {
       hypridle = enabled;
@@ -65,9 +65,9 @@ with lib.matrix;
 
     loa-logs = {
       enable = true;
-      version = "1.47.0";
+      version = "1.47.1";
       daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
-      appImageHash = "sha256-kZ5gUee3oCLeHDtKza22MciEjuvjEj0Sq3p5m8Oxc3c=";
+      appImageHash = "sha256-4bY7gxom6F0OZenzilqNMf6hDoReM4b+EyTiblJgeHU=";
     };
     social = {
       discord = enabled;

@@ -18,6 +18,7 @@ mkFeature args {
     programs.kitty = {
       enable = true;
       settings = {
+        include = "themes/noctalia.conf";
         confirm_os_window_close = 0;
         window_margin_width = 21.75;
         cursor_shape = "beam";

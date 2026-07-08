@@ -13,7 +13,7 @@ mkFeature args {
   };
 
   home = {
-    stylix.targets.qt.enable = true;
+    # stylix.targets.qt.enable = true;
   };
   nixos = { cfg, ... }: {
     # environment.variables.QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
