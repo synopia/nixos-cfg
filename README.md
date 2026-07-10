@@ -2,7 +2,7 @@
 
 Personal NixOS flake for the `matrix` workstation. The configuration is built
 around a small feature system under the `matrix.*` option namespace, with NixOS,
-Home Manager, Hyprland, Quickshell, desktop apps, development tooling, and
+Home Manager, Hyprland, Quickshell, Niri, Noctalia, desktop apps, development tooling, and
 system services kept in focused modules.
 
 ## Hosts
@@ -12,9 +12,6 @@ The active flake output is:
 ```sh
 nixosConfigurations.matrix
 ```
-
-There is also a `hosts/matrix-vm/` profile in the tree, but it is currently not
-exported from `flake.nix`.
 
 ## Layout
 
@@ -33,7 +30,6 @@ exported from `flake.nix`.
 |   `-- features/              # optional feature modules
 |-- users/
 |   `-- synopia.nix            # user identity and feature enablement
-`-- home/                      # local user files copied or referenced by modules
 ```
 
 Feature modules are auto-imported by `modules/features/default.nix`. Any
