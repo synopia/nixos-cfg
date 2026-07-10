@@ -13,7 +13,7 @@ mkFeature args {
 
   nixos = {
     programs.niri = enabled;
-    matrix.desktop.dm.greetd = enabled;
+    matrix.desktop.dm.noctalia-greeter = enabled;
     environment.systemPackages = with pkgs; [
       xwayland-satellite
       bibata-cursors
@@ -21,7 +21,7 @@ mkFeature args {
       adw-gtk3
     ];
   };
-  home = { config, ... }: {
+  home = {
     imports = [
       inputs.niri.homeModules.niri
       inputs.noctalia.homeModules.default
@@ -31,7 +31,32 @@ mkFeature args {
       ./niri/settings-hm.nix
     ];
 
-    programs.noctalia = enabled;
+    programs.noctalia = {
+      enable = true;
+      systemd = enabled;
+      settings = {
+        themes.templates = {
+          enable_builtin_templates = true;
+          builtin_ids = [
+            "btop"
+            "gtk3"
+            "gtk4"
+            "kcolorscheme"
+            "kitty"
+            "niri"
+            "starship"
+            "qt"
+          ];
+          enable_community_templates = true;
+          community_ids = [
+            "obsidian"
+            "zed"
+            "discord"
+            "steam"
+          ];
+        };
+      };
+    };
 
     programs.niri = {
       enable = true;

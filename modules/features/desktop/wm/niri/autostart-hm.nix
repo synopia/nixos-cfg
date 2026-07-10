@@ -11,9 +11,7 @@
         #     "hyprpolkitagent"
         #   ];
         # }
-        # { command = [ "arrpc" ]; }
         { command = [ "xwayland-satellite" ]; }
-        { command = [ "noctalia" ]; }
         { command = [ "vesktop" ]; }
         { command = [ "karere" ]; }
         { command = [ "obsidian" ]; }

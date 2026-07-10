@@ -37,6 +37,7 @@
             stylix.nixosModules.stylix
             nix-flatpak.nixosModules.nix-flatpak
             hyprland.nixosModules.default
+            inputs.noctalia-greeter.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -122,6 +123,10 @@
     niri.url = "github:sodiboo/niri-flake";
     noctalia = {
       url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

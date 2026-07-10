@@ -43,13 +43,21 @@
           };
         };
 
-        gaps = 6;
+        gaps = 8;
 
+        default-column-width = {
+        };
+        preset-column-widths = [
+          { proportion = 0.3333; }
+          { proportion = 0.5; }
+          { proportion = 0.6667; }
+          { fixed = 1920; }
+        ];
         struts = {
-          left = 10;
-          right = 10;
-          top = 10;
-          bottom = 10;
+          left = 0;
+          right = 0;
+          top = 0;
+          bottom = 0;
         };
       };
 
@@ -58,7 +66,10 @@
           variant = "intl";
           layout = "us";
         };
-        focus-follows-mouse.enable = true;
+        focus-follows-mouse = {
+          enable = true;
+          max-scroll-amount = "0%";
+        };
         warp-mouse-to-focus.enable = false;
       };
       outputs = {
@@ -97,7 +108,8 @@
 
         XDG_SESSION_TYPE = "wayland";
         XDG_CURRENT_DESKTOP = "niri";
-        DISPLAY = ":0";
+
+        STARSHIP_CONFIG = "/home/synopia/.config/starship/generated.toml";
       };
     };
   };

@@ -101,7 +101,7 @@ let
   composeStarship = pkgs.writeShellScript "compose-starship-config" ''
         set -eu
         base="${starshipBase}"
-        palette="$HOME/.config/starship.toml"
+        palette="$HOME/.cache/noctalia/starship-palette.toml"
         out="$HOME/.config/starship/generated.toml"
         tmp="$out.tmp"
 
