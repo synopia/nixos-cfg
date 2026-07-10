@@ -50,6 +50,7 @@ mkFeature args {
           "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
           "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
         ];
         substituters = [
           "https://cache.nixos.org"
@@ -58,6 +59,7 @@ mkFeature args {
           "https://cache.garnix.io"
           "https://attic.xuyh0120.win/lantian"
           "https://ezkea.cachix.org"
+          "https://noctalia.cachix.org"
         ];
       };
     };

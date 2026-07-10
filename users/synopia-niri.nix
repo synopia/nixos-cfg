@@ -14,11 +14,12 @@ with lib.matrix;
     defaultShell = "fish";
 
     shells = {
-      bash = disabled;
-      zsh = disabled;
+      bash = enabled;
+      zsh = enabled;
       fish = enabled;
     };
     addons = {
+      nnn = enabled;
       git = {
         enable = true;
         name = "Paul Fritsche";
@@ -44,7 +45,9 @@ with lib.matrix;
   };
 
   matrix.desktop = {
+    enable = true;
     terminal = "kitty";
+    fileManager = "dolphin";
 
     wm.niri = enabled;
 
@@ -54,7 +57,7 @@ with lib.matrix;
     addons = {
       hypridle = enabled;
       rofi = enabled;
-      dolphin = disabled;
+      dolphin = enabled;
       nautilus = enabled;
       qt = enabled;
     };

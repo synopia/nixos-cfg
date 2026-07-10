@@ -3,18 +3,23 @@
   programs.niri = {
     settings = {
       workspaces = {
-        "main" = {
+        "1-obsidian" = {
+          open-on-output = "HDMI-A-1";
+        };
+        "2-discord" = {
+          open-on-output = "HDMI-A-1";
+        };
+        "3-loa-logs" = {
+          open-on-output = "HDMI-A-1";
+        };
+        "1-main" = {
           open-on-output = "DP-3";
         };
-        "obsidian" = {
-          open-on-output = "HDMI-A-1";
-        };
-        "discord" = {
-          open-on-output = "HDMI-A-1";
-        };
-        "loa-logs" = {
-          open-on-output = "HDMI-A-1";
-        };
+      };
+      prefer-no-csd = true;
+      cursor = {
+        theme = "Bibata-Original-Amber";
+        size = 24;
       };
       hotkey-overlay = {
         skip-at-startup = true;

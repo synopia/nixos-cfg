@@ -12,10 +12,14 @@ in
   programs.niri = {
     settings = {
       binds = with config.lib.niri.actions; {
+        "Mod+Shift+F".action = fullscreen-window;
+        "Mod+Shift+Ctrl+T".action = toggle-debug-tint;
+        "Mod+Shift+Ctrl+D".action = debug-toggle-damage;
         "Mod+Space".action.spawn = noctalia "panel-toggle launcher";
         "Mod+Q".action = close-window;
         "Mod+W".action = spawn "google-chrome";
         "Mod+Return".action = spawn "kitty";
+        "Mod+E".action = spawn "dolphin";
         "Mod+Z".action = spawn "zeditor";
 
         "Mod+Left".action = focus-column-left;
@@ -33,6 +37,7 @@ in
         "Mod+3".action = focus-workspace "discord";
 
         "Mod+Shift+S".action.screenshot = { };
+        "Mod+S".action = set-dynamic-cast-monitor;
       };
     };
   };

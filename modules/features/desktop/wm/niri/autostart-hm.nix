@@ -12,15 +12,24 @@
         #   ];
         # }
         # { command = [ "arrpc" ]; }
-        # { command = [ "xwayland-satellite" ]; }
+        { command = [ "xwayland-satellite" ]; }
         { command = [ "noctalia" ]; }
         { command = [ "vesktop" ]; }
         { command = [ "karere" ]; }
         { command = [ "obsidian" ]; }
         { command = [ "loa-logs" ]; }
-        { command = [ "steam -silent" ]; }
-        { command = [ "jetbrains-toolbox -s" ]; }
-
+        {
+          command = [
+            "steam"
+            "-silent"
+          ];
+        }
+        {
+          command = [
+            "jetbrains-toolbox"
+            "-s"
+          ];
+        }
       ];
     };
   };

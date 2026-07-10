@@ -55,6 +55,8 @@ mkFeature args {
       };
 
       appLauncher = pkgs.writeShellScriptBin "loa-logs" ''
+          export GDK_BACKEND=x11
+          #export WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=wayland
         export LD_PRELOAD="${pkgs.wayland}/lib/libwayland-client.so"
         exec ${appImagePackage}/bin/loa-logs "$@"
       '';

@@ -13,6 +13,9 @@ mkFeature args {
   };
 
   forceEnable = config.matrix.cli.defaultShell == "bash";
+  nixos = {
+    services.envfs.enable = true;
+  };
   home = { cfg, ... }: {
     programs.bash = {
       enable = true;
