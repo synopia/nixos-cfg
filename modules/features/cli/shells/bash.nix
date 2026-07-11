@@ -15,6 +15,9 @@ mkFeature args {
   forceEnable = config.matrix.cli.defaultShell == "bash";
   nixos = {
     services.envfs.enable = true;
+    services.envfs.extraFallbackPathCommands = ''
+      ln -s ${pkgs.bash}/bin/bash $out/bash
+    '';
   };
   home = { cfg, ... }: {
     programs.bash = {

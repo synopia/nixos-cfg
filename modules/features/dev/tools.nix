@@ -17,14 +17,18 @@ mkFeature args {
     nixpkgs.config.permittedInsecurePackages = [
       "pnpm-10.29.2"
     ];
+    environment.systemPackages = [
+      pkgs.python3
+    ];
   };
 
   home = { cfg, ... }: {
     home.packages = with pkgs; [
+      devenv
       neovim
 
       gzip
-      inputs.codex-cli-nix.packages.${pkgs.system}.default
+      inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       nodejs_22
       corepack_22
       python3

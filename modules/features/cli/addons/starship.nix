@@ -110,7 +110,9 @@ let
             cat "$base"
             printf '\n\n'
             if [ -f "$palette" ]; then
+                echo "# >>> NOCTALIA STARSHIP PALETTE >>>"
                 cat "$palette"
+                echo "# <<< NOCTALIA STARSHIP PALETTE <<<"
             else
               cat <<'EOF'
     [palettes.noctalia]

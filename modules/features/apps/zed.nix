@@ -30,6 +30,7 @@ mkFeature args {
         nixfmt
         kdePackages.qtdeclarative
         quickshell
+        luau-lsp
       ];
 
       mutableUserSettings = true;
