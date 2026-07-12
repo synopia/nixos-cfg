@@ -4,8 +4,9 @@
   outputs =
     {
       nixpkgs,
-      stylix,
       niri,
+      noctalia-greeter,
+      hjem,
       ...
     }@inputs:
     let
@@ -34,22 +35,14 @@
                 nur.overlays.default
               ];
             }
-            stylix.nixosModules.stylix
             nix-flatpak.nixosModules.nix-flatpak
             hyprland.nixosModules.default
-            inputs.noctalia-greeter.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs lib;
-              };
-            }
+            noctalia-greeter.nixosModules.default
+            hjem.nixosModules.default
           ];
 
           specialArgs = {
-            inherit inputs lib;
+            inherit inputs;
           };
         };
     in
@@ -80,16 +73,15 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
-    # flake-parts.url = "github:hercules-ci/flake-parts";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    hjem = {
+      url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    stylix = {
-      url = "github:nix-community/stylix";
+    # hjem.follows = "hjem-rum/hjem";
+    hjem-rum = {
+      url = "github:snugnug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hjem.follows = "hjem";
     };
 
     hyprland = {
