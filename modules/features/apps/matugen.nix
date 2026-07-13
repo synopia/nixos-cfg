@@ -7,12 +7,15 @@ args@{
 with lib;
 with lib.matrix;
 mkFeature args {
-  name = "system.gaming";
+  name = "apps.matugen";
 
   options = {
   };
 
-  nixos = { cfg, ... }: {
-    programs.steam.enable = true;
+  nixos = {
+    environment.systemPackages = [
+      pkgs.matugen
+    ];
+
   };
 }

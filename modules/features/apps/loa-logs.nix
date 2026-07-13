@@ -54,24 +54,24 @@ mkFeature args {
         extraPkgs = pkgs: [ ];
       };
 
-      appLauncher = pkgs.writeShellScriptBin "loa-logs" ''
-          export GDK_BACKEND=x11
-          #export WEBKIT_DISABLE_DMABUF_RENDERER=1 GDK_BACKEND=wayland
-        export LD_PRELOAD="${pkgs.wayland}/lib/libwayland-client.so"
+      appX11 = pkgs.writeShellScriptBin "loa-logs" ''
+        echo "X11"
+        export LD_PRELOAD="${pkgs.wayland}/lib/libwayland-client.so.0"
         exec ${appImagePackage}/bin/loa-logs "$@"
       '';
-      desktopItem = pkgs.makeDesktopItem {
-        name = "loa-logs";
-        desktopName = "LOA Logs";
-        exec = "${appLauncher}/bin/loa-logs";
+
+      desktopItemX11 = pkgs.makeDesktopItem {
+        name = "loa-logs-x11";
+        desktopName = "LOA Logs X11";
+        exec = "${appX11}/bin/loa-logs";
         categories = [ "Utility" ];
       };
 
       guiPackage = pkgs.symlinkJoin {
         name = "loa-logs-gui";
         paths = [
-          appLauncher
-          desktopItem
+          appX11
+          desktopItemX11
         ];
       };
     in

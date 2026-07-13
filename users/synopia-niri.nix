@@ -27,6 +27,7 @@ with lib.matrix;
       };
       neofetch = enabled;
       starship = enabled;
+      yazi = enabled;
     };
   };
 
@@ -65,12 +66,14 @@ with lib.matrix;
 
   matrix.apps = {
     obsidian = enabled;
+    matugen = enabled;
 
+    pdf = enabled;
     loa-logs = {
       enable = true;
-      version = "1.47.1";
+      version = "1.47.2";
       daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
-      appImageHash = "sha256-4bY7gxom6F0OZenzilqNMf6hDoReM4b+EyTiblJgeHU=";
+      appImageHash = "sha256-43JNlbIFsyvGVlZIPwO36zRTkuqNO2U2ed18PHwjcw8=";
     };
     social = {
       discord = enabled;

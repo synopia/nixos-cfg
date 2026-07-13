@@ -7,12 +7,15 @@ args@{
 with lib;
 with lib.matrix;
 mkFeature args {
-  name = "system.gaming";
+  name = "cli.addons.yazi";
 
   options = {
   };
 
-  nixos = { cfg, ... }: {
-    programs.steam.enable = true;
+  home = { cfg, ... }: {
+    programs.yazi = enabled;
+
+    home.packages = [
+    ];
   };
 }
