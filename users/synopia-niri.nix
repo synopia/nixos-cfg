@@ -67,7 +67,7 @@ with lib.matrix;
   matrix.apps = {
     obsidian = enabled;
     matugen = enabled;
-
+    pinta = enabled;
     pdf = enabled;
     loa-logs = {
       enable = true;

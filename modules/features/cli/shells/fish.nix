@@ -16,6 +16,9 @@ mkFeature args {
   home = { cfg, ... }: {
     programs.fish = {
       enable = true;
+      shellInitLast = ''
+        set fish_color_autosuggestion 'color3'
+      '';
     };
 
     home.packages = [
