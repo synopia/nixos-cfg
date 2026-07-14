@@ -27,12 +27,12 @@ in
     #   '';
     # };
 
-    services.flatpak.packages = [
-      "org.vinegarhq.Sober"
-      "org.gtk.Gtk3theme.adw-gtk3"
-      "org.gtk.Gtk3theme.adw-gtk3-dark"
-      "org.upscayl.Upscayl"
-      # "com.dec05eba.gpu_screen_recorder"
-    ];
+    # services.flatpak.packages = [
+    #   "org.vinegarhq.Sober"
+    #   "org.gtk.Gtk3theme.adw-gtk3"
+    #   "org.gtk.Gtk3theme.adw-gtk3-dark"
+    #   "org.upscayl.Upscayl"
+    #   # "com.dec05eba.gpu_screen_recorder"
+    # ];
   };
 }

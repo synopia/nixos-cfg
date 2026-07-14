@@ -51,7 +51,7 @@
       nixosConfigurations = import ./hosts {
         inherit self inputs lib;
       };
-      nixosModules.default = self.lib.validFiles ./modules/temp;
+      nixosModules.default = self.lib.validFiles ./modules;
 
       # nixosConfigurations = {
       # matrix-vm = addHost "matrix-vm";

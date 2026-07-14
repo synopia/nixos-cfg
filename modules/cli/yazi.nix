@@ -8,15 +8,15 @@
 with lib;
 with self.lib;
 let
-  cfg = config.cfg.apps.kitty;
+  cfg = config.cfg.cli.yazi;
 in
 {
-  options.cfg.apps.kitty = {
-    enable = mkEnableOption "kitty";
+  options.cfg.cli.yazi = {
+    enable = mkEnableOption "yazi";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.kitty ];
+    environment.systemPackages = [ pkgs.yazi ];
     hj.rum.programs.yazi = enabled;
   };
 }

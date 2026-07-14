@@ -69,7 +69,12 @@ with self.lib;
     discord = enabled;
     whatsapp = enabled;
     pinta = enabled;
-    loa-logs = enabled;
+    loa-logs = {
+      enable = true;
+      version = "1.47.2";
+      daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
+      appImageHash = "sha256-43JNlbIFsyvGVlZIPwO36zRTkuqNO2U2ed18PHwjcw8=";
+    };
   };
 
   cfg.services = {
