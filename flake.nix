@@ -3,6 +3,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       niri,
       noctalia-greeter,
@@ -10,62 +11,67 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
+      inherit (nixpkgs) lib;
 
-      mkLib =
-        nixpkgs:
-        nixpkgs.lib.extend (
-          self: super: { matrix = import ./lib { lib = self; }; } // inputs.home-manager.lib
-        );
+      supportedSystems = [ "x86_64-linux" ];
+      forAllSystems =
+        apply: lib.genAttrs supportedSystems (system: apply nixpkgs.legacyPackages.${system});
 
-      addHost =
-        hostName:
-        with inputs;
-        let
-          lib = mkLib inputs.nixpkgs;
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
+      # addHost =
+      #   hostName:
+      #   with inputs;
+      #   let
+      #     lib = mkLib inputs.nixpkgs;
+      #   in
+      #   nixpkgs.lib.nixosSystem {
+      #     inherit system;
 
-          modules = [
-            (./. + "/hosts/${hostName}/")
-            {
-              nixpkgs.overlays = [
-                nix-cachyos-kernel.overlays.pinned
-                nur.overlays.default
-              ];
-            }
-            nix-flatpak.nixosModules.nix-flatpak
-            hyprland.nixosModules.default
-            noctalia-greeter.nixosModules.default
-            hjem.nixosModules.default
-          ];
+      #     modules = [
+      #       (./. + "/hosts/${hostName}/")
+      #       {
+      #         nixpkgs.overlays = [
+      #           nix-cachyos-kernel.overlays.pinned
+      #           nur.overlays.default
+      #         ];
+      #       }
+      #       nix-flatpak.nixosModules.nix-flatpak
+      #       hyprland.nixosModules.default
+      #       noctalia-greeter.nixosModules.default
+      #       hjem.nixosModules.default
+      #     ];
 
-          specialArgs = {
-            inherit inputs;
-          };
-        };
+      #     specialArgs = {
+      #       inherit inputs;
+      #     };
+      #   };
     in
     {
-      nixosConfigurations = {
-        # matrix-vm = addHost "matrix-vm";
-        matrix = addHost "matrix";
+      lib = import ./lib { inherit lib inputs; };
+
+      nixosConfigurations = import ./hosts {
+        inherit self inputs lib;
       };
-      devShells.x86_64-linux.default =
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-        in
-        pkgs.mkShell {
-          buildInputs = [
-            inputs.alejandra.defaultPackage.${system}
-            pkgs.shellcheck
-            pkgs.shfmt
-            pkgs.nil
-            pkgs.qt5.qttools
-          ];
-        };
+      nixosModules.default = self.lib.validFiles ./modules/temp;
+
+      # nixosConfigurations = {
+      # matrix-vm = addHost "matrix-vm";
+      # matrix = addHost "matrix";
+      # };
+      # devShells.x86_64-linux.default =
+      #   let
+      #     pkgs = import nixpkgs {
+      #       inherit system;
+      #     };
+      #   in
+      #   pkgs.mkShell {
+      #     buildInputs = [
+      #       inputs.alejandra.defaultPackage.${system}
+      #       pkgs.shellcheck
+      #       pkgs.shfmt
+      #       pkgs.nil
+      #       pkgs.qt5.qttools
+      #     ];
+      #   };
     };
 
   inputs = {
@@ -77,7 +83,6 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # hjem.follows = "hjem-rum/hjem";
     hjem-rum = {
       url = "github:snugnug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -113,12 +118,24 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
+
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    matugen = {
+      url = "github:/InioX/Matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    qtengine = {
+      url = "github:kossLAN/qtengine";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

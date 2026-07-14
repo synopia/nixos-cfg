@@ -1,0 +1,20 @@
+layer-rule {
+    match namespace="notification"
+    block-out-from "screencast"
+}
+window-rule {
+    match app-id="vesktop"
+    open-on-workspace  "2-discord"
+}
+window-rule {
+    match app-id="io.github.tobagin.karere"
+    open-on-workspace "2-discord"
+}
+window-rule {
+    match app-id="obsidian"
+    open-on-workspace "1-obsidian"
+}
+window-rule {
+    match app-id="Loa-logs"
+    open-on-workspace  "3-loa-logs"
+}

@@ -1,0 +1,83 @@
+debug {
+    disable-cursor-plane
+}
+output "DP-3" {
+    mode "1920x1080"
+    scale 1.0
+    position x=1920 y=0
+    focus-at-startup
+}
+output "HDMI-A-1" {
+    mode "1920x1080"
+    scale 1.0
+    position x=0 y=0
+}
+
+
+workspace "1-obsidian" {
+    open-on-output "HDMI-A-1"
+}
+workspace "2-discord" {
+    open-on-output  "HDMI-A-1";
+}
+workspace "3-loa-logs"  {
+    open-on-output  "HDMI-A-1";
+}
+workspace "1-main" {
+    open-on-output  "DP-3";
+}
+
+prefer-no-csd
+cursor {
+    xcursor-theme "Bibata-Original-Amber"
+    xcursor-size  24
+}
+hotkey-overlay {
+    skip-at-startup
+}
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+layout {
+
+    background-color "transparent"
+
+    focus-ring {
+          on
+          width 3;
+          active-color "#A8AEFF"
+
+          inactive-color "#505050"
+
+    }
+
+    gaps 8
+
+    preset-column-widths {
+          proportion 0.3333
+          proportion 0.5
+          proportion 0.6667
+          fixed 1920
+    }
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
+}
+
+input  {
+    keyboard  {
+        xkb {
+            variant "intl"
+            layout "us"
+        }
+    }
+    focus-follows-mouse max-scroll-amount="10%"
+
+    //warp-mouse-to-focus
+}

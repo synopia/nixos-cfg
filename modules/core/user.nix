@@ -1,11 +1,18 @@
-{ config, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  self,
+  ...
+}:
 with lib;
-with lib.matrix;
+with self.lib;
 let
-  cfg = config.matrix.user;
+  cfg = config.cfg.user;
 in
 {
-  options.matrix.user = {
+  options.cfg.user = {
     name = mkOpt' types.str "Primary username.";
     fullName = mkOpt types.str "" "Full name of the primary user.";
     homeDirectory = mkOpt types.str "/home/${cfg.name}" "Home directory of the primary user.";
@@ -13,36 +20,55 @@ in
 
     extraGroups = mkOpt (types.listOf types.str) [
       "wheel"
-      "networkmanager"
       "audio"
       "video"
       "input"
     ] "Extra groups for the primary user.";
-    homeStateVersion = mkOpt types.str "26.05" "Home Manager state version.";
+    stateVersion = mkOpt types.str "26.05" "Nix state version.";
 
     timeZone = mkOpt types.str "Europe/Berlin" "Timezone";
-    defaultLocale = mkOpt types.str "de_DE.UTF-8" "Default locale";
+    defaultLocale = mkOpt types.str "en_US.UTF-8" "Default locale";
     extraLocale = mkOpt types.str "de_DE.UTF-8" "Extra locale";
+
+    smoothScroll = mkBoolOpt true "Smooth scroll";
   };
 
+  imports = [
+    inputs.hjem.nixosModules.default
+    (mkAliasOptionModule [ "hj" ] [ "hjem" "users" cfg.name ])
+  ];
+
   config = {
+    system.stateVersion = cfg.stateVersion;
+
+    hjem = {
+      clobberByDefault = true;
+      extraModules = [
+        inputs.hjem-rum.hjemModules.default
+        inputs.noctalia.hjemModules.default
+
+      ];
+      users.${cfg.name} = {
+        enable = true;
+        directory = cfg.homeDirectory;
+      };
+    };
     users.users.${cfg.name} = {
       isNormalUser = true;
       description = cfg.fullName;
       extraGroups = cfg.extraGroups;
+      home = cfg.homeDirectory;
+      uid = 1000;
     };
-
-    home-manager.users.${cfg.name} = {
-      home.username = cfg.name;
-      home.homeDirectory = cfg.homeDirectory;
-      home.stateVersion = cfg.homeStateVersion;
+    environment.sessionVariables = {
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_STATE_HOME = "$HOME/.local/state";
     };
-
-    time.timeZone = cfg.timeZone;
-
-    i18n.defaultLocale = cfg.defaultLocale;
-
-    i18n.extraLocaleSettings = {
+    time.timeZone = mkDefault cfg.timeZone;
+    i18n.defaultLocale = mkDefault cfg.defaultLocale;
+    i18n.extraLocaleSettings = mkDefault {
       LC_ADDRESS = cfg.extraLocale;
       LC_IDENTIFICATION = cfg.extraLocale;
       LC_MEASUREMENT = cfg.extraLocale;

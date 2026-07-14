@@ -1,7 +1,6 @@
 { lib, ... }:
 with lib;
 rec {
-  mkFeature = import ./mkFeature.nix { inherit lib; };
   mkOpt =
     type: default: description:
     mkOption { inherit type default description; };
@@ -35,9 +34,13 @@ rec {
   validFiles =
     dir:
     map (file: dir + "/${file}") (
-      filter (file: hasSuffix ".nix" file && file != "default.nix" && !lib.hasSuffix "-hm.nix" file) (
-        files dir
-      )
+      filter (
+        file:
+        hasSuffix ".nix" file
+        && file != "default.nix"
+        && !lib.hasSuffix "-hm.nix" file
+        && !lib.hasPrefix "_" file
+      ) (files dir)
     );
 
 }
