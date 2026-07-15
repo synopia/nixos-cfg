@@ -18,6 +18,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.gh ];
     environment.shellAliases = {
       g = "git";
       ga = "git add";

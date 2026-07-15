@@ -51,7 +51,7 @@ in
           spawn = [ "google-chrome" ];
         };
         "Mod+E" = {
-          spawn = [ "nautilus" ];
+          spawn = [ "dolphin" ];
         };
         "Mod+Z" = {
           spawn = [ "zeditor" ];

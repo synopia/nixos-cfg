@@ -54,6 +54,7 @@ with self.lib;
   };
 
   cfg.apps = {
+    vlc = enabled;
     browsers = {
       brave = enabled;
       chromium = enabled;
