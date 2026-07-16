@@ -26,7 +26,7 @@ in
       # kdePackages.qtstyleplugin-kvantum
       # kdePackages.breeze
       # kdePackages.breeze.qt5
-      # kdePackages.breeze-icons
+      kdePackages.breeze-icons
 
       # kdePackages.breeze
       # kdePackages.breeze-icons
@@ -51,9 +51,19 @@ in
       enable = true;
       config = {
         theme = {
-          # colorScheme = "/home/synopia/.local/share/color-schemes/matugen.colors";
-          # iconTheme = "breeze-dark";
-          # style = "breeze";
+          colorScheme = "/home/synopia/.local/share/color-schemes/noctalia.colors";
+          iconTheme = "breeze-dark";
+          style = "breeze";
+          font = {
+            family = "Inter";
+            size = 11;
+            weight = -1;
+          };
+          fontFixed = {
+            family = "JetBrains Mono";
+            size = 11;
+            weight = -1;
+          };
         };
         font = {
           family = "Noto Serif";

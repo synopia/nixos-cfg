@@ -70,11 +70,12 @@ with self.lib;
     discord = enabled;
     whatsapp = enabled;
     pinta = enabled;
+    pdfarranger = enabled;
     loa-logs = {
       enable = true;
-      version = "1.47.2";
-      daemonHash = "sha256-AH/o0rRVSuLg9Ex7wDE5f7r17qghnf/lOFdibG4YZ1g=";
-      appImageHash = "sha256-43JNlbIFsyvGVlZIPwO36zRTkuqNO2U2ed18PHwjcw8=";
+      version = "1.48.2";
+      daemonHash = "sha256-G0ZQeMRkzkd+quDQdfzszyMTJp5zVzgxXK863bpAK8o";
+      appImageHash = "sha256-aGRvYre3Hx19oLqQM6ugnUsaLCjhG6Mx4/5EJPy5G7I=";
     };
   };
 
@@ -83,6 +84,8 @@ with self.lib;
     mate-polkit = enabled;
     flatpak = enabled;
     vmhost = disabled;
+    printing = enabled;
+    kdeconnect = enabled;
   };
 
   cfg.dev = {
