@@ -17,6 +17,14 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.kitty ];
-    hj.rum.programs.kitty = enabled;
+    hj.rum.programs.kitty = {
+      enable = true;
+      theme = {
+        dark = "${config.hj.directory}/.config/kitty/themes/noctalia.conf";
+      };
+      integrations = {
+        fish.enable = true;
+      };
+    };
   };
 }

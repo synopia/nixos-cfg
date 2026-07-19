@@ -13,6 +13,7 @@ in
 {
   options.cfg.services.mate-polkit.enable = mkEnableOption "mate-polkit";
   config = mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.mate-polkit ];
     security.polkit.enable = true;
     hj.systemd.services.mate-polkit = {
       description = "Mate Polkit";

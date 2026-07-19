@@ -14,13 +14,16 @@ in
   options.cfg.cli.neofetch = {
     enable = mkEnableOption "Neofetch (fastfetch)";
     integrations = {
-      fish.enable = mkEnableOption "neofetch integration with fish";
+      fish = mkEnableOption "neofetch integration with fish";
     };
   };
 
   config = mkIf cfg.enable {
     hj.rum.programs = {
-      fish.config = mkIf cfg.integrations.fish.enable (mkAfter "command -q fastfetch; and fastfetch");
+      fish.earlyConfigFiles = mkIf cfg.integrations.fish {
+        fast-fetch = "command -q fastfetch; and fastfetch";
+        set-path = "fish_add_path ~/.local/bin";
+      };
     };
 
     hj.packages = [

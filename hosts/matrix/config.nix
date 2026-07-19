@@ -49,7 +49,10 @@ with self.lib;
     };
     fish = enabled;
     starship = enabled;
-    neofetch = enabled;
+    neofetch = {
+      enable = true;
+      integrations.fish = true;
+    };
     yazi = enabled;
   };
 
