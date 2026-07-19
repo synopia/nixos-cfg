@@ -33,6 +33,7 @@ in
 
     hj.programs.noctalia = {
       enable = true;
+      systemd = enabled;
       settings = {
         theme = {
           builtin = "Ayu";

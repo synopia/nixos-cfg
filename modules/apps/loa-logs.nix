@@ -25,7 +25,7 @@ let
   };
 
   appImageSrc = pkgs.fetchurl {
-    url = "https://github.com/snoww/loa-logs/releases/download/${cfg.version}/LOA.Logs_${cfg.version}_amd64.AppImage";
+    url = "https://github.com/snoww/loa-logs/releases/download/v${cfg.version}/LOA.Logs_${cfg.version}_amd64.AppImage";
     hash = cfg.appImageHash;
   };
 

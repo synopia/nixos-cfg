@@ -13,11 +13,11 @@ in
 {
   options.cfg.services.printing.enable = mkEnableOption "printing";
   config = mkIf cfg.enable {
-    services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
+    # services.avahi = {
+    # enable = true;
+    # nssmdns4 = true;
+    # openFirewall = true;
+    # };
 
     hardware.printers = {
       ensurePrinters = [

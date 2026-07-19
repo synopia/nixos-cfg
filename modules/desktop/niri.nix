@@ -25,9 +25,40 @@ in
     environment.systemPackages = with pkgs; [
       xwayland-satellite
       kdePackages.breeze
-
+      kdePackages.kde-cli-tools
     ];
+    environment.etc."xdg/menus/applications.menu".source =
+      "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
     programs.niri = enabled;
+    xdg.portal = {
+      enable = true;
+
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-gtk
+      ];
+
+      config.niri = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+
+        "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+        "org.freedesktop.impl.portal.Access" = "gtk";
+        "org.freedesktop.impl.portal.Notification" = "gtk";
+        "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+      };
+    };
+    systemd.user.services = {
+      "xdg-desktop-portal".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
+        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+      "xdg-desktop-portal-gnome".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
+        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+      "xdg-desktop-portal-gtk".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
+        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+    };
+
     hj.rum.desktops.niri = {
       enable = true;
 
