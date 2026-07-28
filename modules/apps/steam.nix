@@ -16,6 +16,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ mediainfo mkvtoolnix ];
+    programs.gpu-screen-recorder = enabled;
     programs.steam = enabled;
     programs.gamescope = enabled;
   };

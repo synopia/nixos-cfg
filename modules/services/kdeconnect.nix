@@ -13,6 +13,7 @@ in
 {
   options.cfg.services.kdeconnect.enable = mkEnableOption "kdeconnect";
   config = mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.sshfs ];
     programs.kdeconnect = {
       enable = true;
       package = pkgs.symlinkJoin {

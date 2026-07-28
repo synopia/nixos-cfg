@@ -32,10 +32,10 @@
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/cachyos" = {
-    device = "/dev/nvme1n1p2";
-    fsType = "btrfs";
-  };
+  # fileSystems."/mnt/cachyos" = {
+  #   device = "/dev/nvme1n1p2";
+  #   fsType = "btrfs";
+  # };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/A65C-BB10";

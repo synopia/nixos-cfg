@@ -1,4 +1,4 @@
-{
+n{
   pkgs,
   config,
   self,
@@ -14,7 +14,7 @@ let
     inherit (cfg) version;
 
     src = pkgs.fetchurl {
-      url = "https://github.com/snoww/loa-logs/releases/download/v${cfg.version}/nineveh";
+      url = "https://github.com/snoww/loa-logs/releases/download/v${cfg.ninevehVersion}/nineveh";
       hash = cfg.daemonHash;
     };
 
@@ -62,6 +62,7 @@ in
   options.cfg.apps.loa-logs = {
     enable = mkEnableOption "LOA Logs";
     version = mkOpt types.str "1.47.0" "LoaLogs Version";
+    ninevehVersion = mkOpt types.str "1.47.0" "LoaLogs Version (Nineveh)";
     daemonHash = mkOpt types.str fakeHash "Hash of daemon binary";
     appImageHash = mkOpt types.str fakeHash "Hash of app image file";
     daemonArgs = mkOpt (types.listOf types.str) [

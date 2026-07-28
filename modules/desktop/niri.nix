@@ -175,6 +175,7 @@ in
           "jetbrains-toolbox"
           "-s"
         ]
+        [ "~/.local/bin/lost-ark-raid-recorder.fish"]
       ];
       extraVariables = {
         CLUTTER_BACKEND = "wayland";

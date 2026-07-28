@@ -19,5 +19,6 @@ in
     environment.systemPackages = [
       pkgs.kdePackages.dolphin
     ];
+    services.udisks2 = enabled;
   };
 }
