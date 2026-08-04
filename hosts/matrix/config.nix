@@ -64,6 +64,7 @@ with self.lib;
       firefox = enabled;
       google-chrome = enabled;
     };
+    telegram = enabled;
     steam = enabled;
     kitty = enabled;
     dolphin = enabled;

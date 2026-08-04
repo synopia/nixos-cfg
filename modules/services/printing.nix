@@ -35,12 +35,12 @@ in
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
     };
-    services.printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-        cups-browsed
-      ];
-    };
+    # services.printing = {
+      # enable = true;
+      # drivers = with pkgs; [
+        # cups-filters
+        # cups-browsed
+      # ];
+    # };
   };
 }

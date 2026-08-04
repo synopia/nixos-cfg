@@ -52,11 +52,11 @@ in
     };
     systemd.user.services = {
       "xdg-desktop-portal".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
-        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+        "/run/current-system/sw/share/xdg-desktop-portal/portals";
       "xdg-desktop-portal-gnome".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
-        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+        "/run/current-system/sw/share/xdg-desktop-portal/portals";
       "xdg-desktop-portal-gtk".environment.NIX_XDG_DESKTOP_PORTAL_DIR =
-        config.environment.sessionVariables.NIX_XDG_DESKTOP_PORTAL_DIR;
+        "/run/current-system/sw/share/xdg-desktop-portal/portals";
     };
 
     hj.rum.desktops.niri = {

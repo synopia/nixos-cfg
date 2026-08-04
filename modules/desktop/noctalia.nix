@@ -16,10 +16,6 @@ in
     enable = mkEnableOption "Noctalia";
   };
 
-  imports = [
-    inputs.noctalia.nixosModules.default
-  ];
-
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       python3
@@ -27,6 +23,7 @@ in
     ];
     programs.noctalia = {
       enable = true;
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       systemd = enabled;
       recommendedServices = enabled;
     };

@@ -30,7 +30,6 @@ with self.lib;
 
           "https://cache.nixos.org"
           "https://nixpkgs-wayland.cachix.org"
-          "https://cache.garnix.io"
           "https://attic.xuyh0120.win/lantian"
           "https://ezkea.cachix.org"
           "https://noctalia.cachix.org"
@@ -43,7 +42,6 @@ with self.lib;
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
           "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
           "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
         ];
