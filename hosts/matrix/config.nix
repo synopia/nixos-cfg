@@ -77,10 +77,10 @@ with self.lib;
     pdfarranger = enabled;
     loa-logs = {
       enable = true;
-      version = "1.48.4";
+      version = "1.48.5";
       ninevehVersion = "1.48.0";
       daemonHash = "sha256-G0ZQeMRkzkd+quDQdfzszyMTJp5zVzgxXK863bpAK8o";
-      appImageHash = "sha256-2pc9nnRc+ULOq2NSi7E5JLnDG7pAk1SlSaqvKsTPIyI=";
+      appImageHash = "sha256-X20Lq7YFgrB0ZgjC7a+6thpTSFjN7gknTycfs7R6vqU=";
     };
   };
 

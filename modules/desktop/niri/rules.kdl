@@ -17,4 +17,5 @@ window-rule {
 window-rule {
     match app-id="Loa-logs"
     open-on-workspace  "3-loa-logs"
+    open-focused false
 }
