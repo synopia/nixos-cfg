@@ -42,7 +42,7 @@ in
     system.stateVersion = cfg.stateVersion;
 
     hjem = {
-      clobberByDefault = false;
+      clobberByDefault = true;
       extraModules = [
         inputs.hjem-rum.hjemModules.default
         inputs.noctalia.hjemModules.default

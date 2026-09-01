@@ -77,10 +77,10 @@ with self.lib;
     pdfarranger = enabled;
     loa-logs = {
       enable = true;
-      version = "1.49.1";
+      version = "1.49.2";
       ninevehVersion = "1.49.0";
       daemonHash = "sha256-FsMD6m8aNGRPhHaGweBNsuc+wAPpz0nZKzCF8BgX6w8=";
-      appImageHash = "sha256-wGQ0psVynzZV0aAEpokgi1O/m6WVKO0Ogx0oS6216lM=";
+      appImageHash = "sha256-AMbipj5bv3qI3La40wE20Mp0Axwl/vOGyFSWa4LfREk=";
     };
   };
 
@@ -91,6 +91,7 @@ with self.lib;
     vmhost = disabled;
     printing = enabled;
     kdeconnect = enabled;
+    jellyfin = enabled;
   };
 
   cfg.dev = {

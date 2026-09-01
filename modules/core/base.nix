@@ -13,11 +13,13 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
-    btop
+    btop-rocm
     fd
     jq
     tree
     git
     dgop
+    parted
+    ffmpeg
   ];
 }
