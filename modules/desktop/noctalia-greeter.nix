@@ -24,7 +24,7 @@ in
     environment.systemPackages = with pkgs; [
       bibata-cursors
     ];
-    programs.noctalia-greeter = {
+    services.displayManager.noctalia-greeter = {
       enable = true;
       greeter-args = "";
       settings = {

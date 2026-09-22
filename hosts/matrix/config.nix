@@ -75,12 +75,13 @@ with self.lib;
     whatsapp = enabled;
     pinta = enabled;
     pdfarranger = enabled;
+    llm = enabled;
     loa-logs = {
       enable = true;
-      version = "1.49.2";
-      ninevehVersion = "1.49.0";
-      daemonHash = "sha256-FsMD6m8aNGRPhHaGweBNsuc+wAPpz0nZKzCF8BgX6w8=";
-      appImageHash = "sha256-AMbipj5bv3qI3La40wE20Mp0Axwl/vOGyFSWa4LfREk=";
+      version = "1.50.2";
+      ninevehVersion = "1.50.0";
+      daemonHash = "sha256-WaHgTYS1AxxzHYYPyuhIJYAB5oNh0jBwP7y1goJYvsA=";
+      appImageHash = "sha256-Lw2HGJIJkC6iJUYG+rjuG8fAM3/jTvpDZOOLZ+9ItZg=";
     };
   };
 

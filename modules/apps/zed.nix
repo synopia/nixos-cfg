@@ -16,7 +16,6 @@ in
     enable = mkEnableOption "Zed Editor";
   };
   config = mkIf cfg.enable {
-    programs.nix-ld.enable = true;
     hj.packages = with pkgs; [
       nil
       nixd

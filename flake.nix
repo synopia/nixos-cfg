@@ -79,6 +79,13 @@
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hermes-agent.url = "github:NousResearch/hermes-agent";
+
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -136,6 +143,11 @@
 
     qtengine = {
       url = "github:kossLAN/qtengine";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    prism-llama = {
+      url = "github:PrismML-Eng/llama.cpp/prism";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

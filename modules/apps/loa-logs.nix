@@ -10,8 +10,9 @@ with self.lib;
 let
   cfg = config.cfg.apps.loa-logs;
   daemonPackage = pkgs.stdenvNoCC.mkDerivation {
-    pname = "loa-logs-nineveh";
-    inherit (cfg) version;
+    pname = "logs-nineveh";
+    inherit (cfg);
+    version = cfg.ninevehVersion;
 
     src = pkgs.fetchurl {
       url = "https://github.com/snoww/loa-logs/releases/download/v${cfg.ninevehVersion}/nineveh";

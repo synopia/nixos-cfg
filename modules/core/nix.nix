@@ -5,11 +5,11 @@ with self.lib;
     nix = {
       package = pkgs.nixVersions.latest;
       channel = disabled;
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
+      # gc = {
+      #   automatic = true;
+      #   dates = "weekly";
+      #   options = "--delete-older-than 7d";
+      # };
       settings = {
         experimental-features = [
           "nix-command"
@@ -47,25 +47,7 @@ with self.lib;
         ];
       };
     };
-    # nixpkgs.overlays = [
-    #   (final: prev: {
-    #     pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-    #       (
-    #         python-final: python-prev: {
-    #           nanoemoji = python-prev.nanoemoji.overridePythonAttrs (oldAttrs: {
-    #             # GitHub's generated archive for this tag changed upstream.
-    #             src = final.fetchFromGitHub {
-    #               owner = "googlefonts";
-    #               repo = "nanoemoji";
-    #               rev = "refs/tags/v${oldAttrs.version}";
-    #               hash = "sha256-FysyKC01XBnRiur5RR9fcsTxQqE8x0JJHSoe3q6JtKc=";
-    #             };
-    #           });
-    #         }
-    #       )
-    #     ];
-    #   })
-    # ];
+
     nixpkgs.config = {
       allowUnfree = true;
     };

@@ -20,16 +20,25 @@ in
     nixpkgs.config.permittedInsecurePackages = [
       "pnpm-10.29.2"
     ];
-    environment.systemPackages = [
-      pkgs.python3
+    environment.systemPackages = with pkgs; [
+      (python3.withPackages (python-pkgs: with python-pkgs; [
+        requests
+      ]))
+      uv
+      libGL
+
     ];
     hj.packages = with pkgs; [
       devenv
       neovim
 
+      gnumake
+      gcc
+      pkg-config
       gzip
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       nodejs_22
+      bun
       corepack_22
       python3
 
