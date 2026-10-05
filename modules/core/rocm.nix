@@ -10,7 +10,7 @@ with self.lib;
 
   environment.systemPackages = with pkgs; [
     git
-    python312
+    python3
     uv
 
     rocmPackages.rocminfo

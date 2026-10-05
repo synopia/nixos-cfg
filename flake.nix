@@ -8,6 +8,7 @@
       niri,
       noctalia-greeter,
       hjem,
+      a2tools,
       ...
     }@inputs:
     let
@@ -99,6 +100,17 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    a2tools-src = {
+      url = "github:taengu/A2Tools-DPS-Meter/main";
+      flake = false;
+    };
+
+    a2tools = {
+      url = "path:/home/synopia/Projects/1_Privat/A2Tools-DPS-Meter/packaging/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.a2tools-src.follows = "a2tools-src";
     };
 
     nix-flatpak = {

@@ -78,10 +78,10 @@ with self.lib;
     llm = enabled;
     loa-logs = {
       enable = true;
-      version = "1.50.2";
-      ninevehVersion = "1.50.0";
-      daemonHash = "sha256-WaHgTYS1AxxzHYYPyuhIJYAB5oNh0jBwP7y1goJYvsA=";
-      appImageHash = "sha256-Lw2HGJIJkC6iJUYG+rjuG8fAM3/jTvpDZOOLZ+9ItZg=";
+      version = "1.51.2";
+      ninevehVersion = "1.51.1";
+      daemonHash = "sha256-5ZYz8vd5Is3SXg8X/7KCQ4Z+EndxE8bjJ4kn+rT4/GQ=";
+      appImageHash = "sha256-DJV/nhyJ2v2laSrPkYs41ED2VxR/LLKuqw51DekowAo=";
     };
   };
 

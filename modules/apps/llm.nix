@@ -18,7 +18,8 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      inputs.prism-llama.packages.${pkgs.stdenv.hostPlatform.system}.rocm
+      # inputs.prism-llama.packages.${pkgs.stdenv.hostPlatform.system}.rocm
+      pkgs.pi-coding-agent
     ];
   };
 }
