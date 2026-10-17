@@ -13,6 +13,7 @@ let
     nixosSystem {
       specialArgs = {
         inherit self inputs hostName;
+        mudfishLegacy = inputs.nixpkgs-mudfish;
       };
       modules = flatten [
         self.nixosModules.default

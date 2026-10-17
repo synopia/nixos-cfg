@@ -26,7 +26,7 @@ in
       ]))
       uv
       libGL
-
+      jetbrains.rust-rover
     ];
     hj.packages = with pkgs; [
       devenv
@@ -37,9 +37,9 @@ in
       pkg-config
       gzip
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-      nodejs_22
+      nodejs_26
       bun
-      corepack_22
+      corepack
       python3
 
       sqlite

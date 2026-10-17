@@ -78,10 +78,15 @@ with self.lib;
     llm = enabled;
     loa-logs = {
       enable = true;
-      version = "1.51.2";
+      version = "1.51.3";
       ninevehVersion = "1.51.1";
       daemonHash = "sha256-5ZYz8vd5Is3SXg8X/7KCQ4Z+EndxE8bjJ4kn+rT4/GQ=";
-      appImageHash = "sha256-DJV/nhyJ2v2laSrPkYs41ED2VxR/LLKuqw51DekowAo=";
+      appImageHash = "sha256-piTnFPEobUeG0JT7OGSmzkwY2iy+mMtbOhbNonMX8pI=";
+    };
+    a2tools = enabled // {
+      # "github" = untouched upstream revision, "local" = the working checkout
+      # at cfg.apps.a2tools.localSource (uncommitted modifications included).
+      source = "local";
     };
   };
 
@@ -93,6 +98,10 @@ with self.lib;
     printing = enabled;
     kdeconnect = enabled;
     jellyfin = enabled;
+    mudfish = {
+      enable = true;
+      autoStart = true;
+    };
   };
 
   cfg.dev = {

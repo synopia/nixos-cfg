@@ -2,7 +2,7 @@
 {
   zramSwap = {
     enable = true;
-    memoryPercent = 150;
+    memoryPercent = 50;
     algorithm = if config.cfg.core.isLaptop || config.cfg.core.isVM then "zstd(level=-1)" else "lz4";
   };
 
